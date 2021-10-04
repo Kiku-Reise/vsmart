@@ -1,0 +1,202 @@
+<style>
+
+.nk-block-token{
+	background:#FFF;
+	color:#333;
+	padding:15px;
+}
+</style>
+<section class="text-white" style="padding-top:30px; padding-bottom:30px;">
+	<h3>IDO Ends In: <span id="getting-started"></span></h3>
+	
+	
+	<p>Send link ref get free Lv 1 = 15% <%= token.name %>, Lv 2 = 5% <%= token.name %>, Lv 3 = 1% <%= token.name %></p>
+
+	<div class="input-group input-group-lg mb-3">
+	  <input type="text" class="form-control" readonly id="LinkRef" placeholder="Link Ref" aria-describedby="basic-addon2">
+	  <button class="btn btn-primary text-white btn-with-icon" id="basic-addon2" onClick="CopyClip('LinkRef')"><i class="ti ti-files"></i> Copy Link</button>
+	</div>
+
+</section>
+
+<section class="text-white tokenInfo" style="margin-bottom:30px; padding-top:15px; padding-bottom:15px;">
+    <h4 class="title title-s4"><%= token.name %> IDO Infomation</h4>
+        <div class="nk-block nk-block-token">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class=""><b>Start Date</b></h6>
+                                <p class="timestart"><%= token.ido_start%> (9:00AM GMT)</p>
+                            </div>
+                        </div><!-- .col  -->
+                        
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class=""><b>End Date</b></h6>
+                                <p class="timeend"><%= token.ido_end%> (11:00AM GMT)</p>
+                            </div>
+                        </div><!-- .col  -->
+
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class=""><b>Tokens for IDO</b></h6>
+                                <p><span class="totalSub"></span> <%- token.name%></p>
+                            </div>
+                        </div><!-- .col  -->
+
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class=""><b>Exchange rate</b></h6>
+                                <p>1 <%- token.name%> = <span class="price"></span></p>
+                            </div>
+                        </div><!-- .col  -->
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class=""><b>Acceptable</b></h6>
+                                <p>BNB</p>
+                            </div>
+                        </div><!-- .col  -->
+                        <div class="col-sm-6">
+                            <div class="stage-info">
+                                <h6 class=""><b>Minimal</b></h6>
+                                <p class="minpay"><%= token.ido_min%> BNB</p>
+                            </div>
+                        </div><!-- .col  -->
+                    </div><!-- .row  -->
+                </div>
+                <div class="col-lg-5 text-white">
+                    <div class="token-status token-status-s5 bg-light-alt round no-bd">
+                        <div class="token-box token-box-s3">
+                            <div class="countdown-s3 countdown-s4 countdown" data-date=""><span class="timeCoundown"></span></div>
+                        </div>
+                        <div class="token-action">
+                            <a class="btn btn-md btn-round btn-grad" href="https://bscscan.com/token/<%= token.contract %>">Token Contracts</a>
+                            <a class="btn btn-md btn-round icon-metamask text-white" data-address="<%= token.contract%>" data-symbol="<%= token.name%>" data-dec="18" data-logo= "<%= base %>/assets/ico/favicon.ico" data-web3=addwatch>Add Metamask</a>
+                        </div>
+                        <ul class="icon-list">
+                            <li><em class="fab fa-bitcoin"></em></li>
+                            <li><em class="fas fa-won-sign"></em></li>
+                            <li><em class="fab fa-cc-visa"></em></li>
+                            <li><em class="fab fa-cc-mastercard"></em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .block @e -->
+</section>
+
+
+
+<style>
+	#getting-started span{
+	font-size:48px;
+	}
+</style>
+
+<script type="text/javascript">
+	$(".timeCoundown").bind('DOMSubtreeModified', function(){
+		$(".countdown").attr("data-date",$(".timeCoundown").text());
+		$("#getting-started").html($(".timeCoundown").text());
+		SmartApps.Plugins.countdown();
+	});
+  
+</script>
+
+
+<section style="padding-top:30px; padding-bottom:30px;">
+
+	<div class="row">
+		<div class="col-md-6 col-12">
+		<div class="card">
+			<div class="card-body">
+			<h4>IDO </h4>
+			<div>1 <%= token.name %> = <span class="pricebnb"></span></div>
+			<div class="">
+				<div class="htmlerror"></div>
+				  <label for="exampleInputPassword1">Amount Min amount: <%= token.ido_min%> BNB | Max amount: <%= token.ido_max%> BNB</label>
+				  <div class="input-group mb-3">
+				    
+				    <input type="text" value="0.05" class="form-control" id="getAmountBNB">
+				    <button type="button" data-web3="ido" class="btn btn-primary">Buy Token</button>
+				  </div>
+				  
+				
+			  
+				
+			</div>
+			</div>
+		</div>
+		</div>
+
+		<div class="col-md-6 col-12">
+			<div class="card">
+			<div class="card-body">
+				<h4>Claim</h4>
+				<p>Claim more token when first buy <%= token.name%></p>
+				<p>Claim when you share link</p>
+				<button class="btn btn-primary" data-web3="claim">Claim Get Free Coin</button>
+				
+			</div>
+			
+		</div>
+	</div>
+</section>
+
+<section  style="padding-top:30px; padding-bottom:30px;">
+	<h4 class="title title-s7 text-white">IDO Package</h4>
+	<div class="row">
+		<div class="col-md-6 mb-3 col-12">
+			<div class="card">
+			<div class="card-body text-center p-3 round hoveborder">
+				<h4>0.3 BNB</h4>
+				<button type="button" data-web3="ido" data-value="0.3" class="btn btn-primary">Buy Token</button>
+			</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 mb-3 col-12">
+			<div class="card">
+				<div class="card-body text-center p-3 round hoveborder">
+					<h4>0.5 BNB</h4>
+					<button type="button" data-web3="ido" data-value="0.5" class="btn btn-primary">Buy Token</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 mb-3 col-12">
+			<div class="card">
+			<div class="card-body text-center p-3 round hoveborder">
+				<h4>1 BNB</h4>
+				<button type="button" data-web3="ido" data-value="1" class="btn btn-primary">Buy Token</button>
+			</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 mb-3 col-12">
+			<div class="card">
+			<div class="card-body text-center p-3 round hoveborder">
+				<h4>1.5 BNB</h4>
+				<button type="button" data-web3="ido" data-value="1.5" class="btn btn-primary">Buy Token</button>
+			</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+var price = 3200;
+
+function calcToken(){
+	var bnbValue = $("#getAmountBNB").val();
+	return bnbValue;
+}
+jQuery(document).ready(function(){
+	$("#1bnbPrice").html("1 BNB = "+price);
+	$(".presenterAddress").val(getCookie("wallet"));
+
+});
+
+
+</script>

@@ -1,0 +1,315 @@
+
+<h4 class="contractaddress d-flex justify-content-between"></h4>
+<hr>
+<div class="row">
+	<div class="col-6 mb-3">
+		<div class="card">
+			<div class="card-body">
+			Factory : <%=address.AddressContractNFTFactory%><br>
+			Stars : <%=address.AddressContractGame1%><br>
+			
+			</div>
+		</div>
+	</div>
+	<div class="col-6 mb-3">
+		<div class="card">
+			<div class="card-body">
+				<button class="btn btn-sm btn-primary" id="setupfatory">Connect Factory</button>
+				<button class="btn btn-sm btn-primary" id="setCurentcy">Connect Curentcy</button>
+				<button class="btn btn-sm btn-primary" id="setNft">Connect NFT</button>
+				
+				<a class="btn btn-primary btn-sm" href="/game/stars/builder">Game Builder</a>
+
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-12 mb-3">
+		<div class="card">
+			<div class="card-body">
+			<div class="input-group mb-3">
+				  <input type="text" class="form-control" id="adminAddress" placeholder="Admin Wallet" aria-label="Recipient's username" aria-describedby="button-addon2">
+				  <button class="btn btn-outline-secondary" type="button" id="setAdmin">Set Admin</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="col-6 mb-3">
+		<div class="card">
+			<div class="card-body">
+			VIP 1 Setup
+			<div class="input-group mb-3">
+				  <input type="text" class="form-control" id="adminAddress" placeholder="Price Update VIP 1" aria-label="Recipient's username" aria-describedby="button-addon2">
+				  <button class="btn btn-outline-secondary" type="button" id="setVIP1">Set VIP 1</button>
+				
+			</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="col-6 mb-3">
+		<div class="card">
+			<div class="card-body">
+				VIP 2 Setup
+				<div class="input-group mb-3">
+					  <input type="text" class="form-control" id="adminAddress" placeholder="Price Update VIP 2" aria-label="Recipient's username" aria-describedby="button-addon2">
+					  <button class="btn btn-outline-secondary" type="button" id="setVIP2">Set VIP 2</button>
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-12 mb-3">
+		<div class="card">
+			<div class="card-body">
+			Setup Reward Token
+			<div class="input-group mb-3">
+				  <input type="text" class="form-control addressTokenReward" value="<%=address.AddressContractSmartToken%>" placeholder="Token Contract Wallet" aria-label="Recipient's username" aria-describedby="button-addon2">
+				  <button class="btn btn-outline-secondary" type="button" id="setRewardToken">Enable Reward </button>
+				</div>
+			
+
+				<div class="rewardTable"></div>
+
+				
+
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
+<br>
+
+
+<h4>Item Stars Marketplace</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Lever</th>
+      <th scope="col">Class</th>
+      <th scope="col">Bullet</th>
+      <th scope="col">Class Bullet</th>
+      <th scope="col">Speed</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody id="LoadController">
+    
+   
+  </tbody>
+</table>
+<h4>Item Bullet Marketplace</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" width="70">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Bullet</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody id="LoadControllerBullet">
+
+    <tr>
+      <th scope="row"><input class="form-control"></th>
+      <td><input class="form-control"></td>
+      <td><input class="form-control"></td>
+      <td><input class="form-control"></td>
+      <td><button class="btn btn-sm btn-primary">Update</button></td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+<h4>Lever Setup</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" width="70">#</th>
+      <th scope="col">Score</th>
+      <th scope="col">Bullet</th>
+      <th scope="col">Bullet Class</th>
+      <th scope="col">Spead</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody id="LoadControllerLever">
+
+    <tr>
+      <th scope="row"><input class="form-control"></th>
+      <td><input class="form-control"></td>
+      <td><input class="form-control"></td>
+      <td><input class="form-control"></td>
+      <td><button class="btn btn-sm btn-primary">Update</button></td>
+    </tr>
+    
+  </tbody>
+</table>
+
+<script type="text/javascript">
+	$(document).ready(async function(){
+		var loadBat = async () => {
+			await SmartApps.tokenGame1.Init();
+			var data = await SmartApps.tokenGame1.getMarketPlate(7);
+		
+			var html = '';
+			for(var i =0;i<data.length;i++){
+	          var img = data[i].Class;
+	          html += '<tr>';
+					  html += '    <th scope="row"><input class="form-control id" value="'+i+'"></th>';
+					  html += '    <td><input class="form-control name" value="'+data[i].name+'"></td>';
+					  html += '    <td><input class="form-control price" value="'+data[i].price+'"></td>';
+					  html += '    <td><input class="form-control lever" value="'+data[i].lever+'"></td>';
+					  html += '    <td><input class="form-control class" value="'+data[i].class+'"></td>';
+					  html += '    <td><input class="form-control bullet" value="'+data[i].bullet+'"></td>';
+					  html += '    <td><input class="form-control bulletclass" value="'+data[i].bulletclass+'"></td>';
+					  html += '    <td><input class="form-control speed" value="'+data[i].speed+'"></td>';
+					  html += '    <td class="text-end"><button class="btn btn-sm btn-primary btnUpdate">Update</button></td>';
+					  html += '  </tr>';
+	        }
+	        $("#LoadController").html(html);
+		};
+		await loadBat();
+
+		$(".btnUpdate").on("click", function(){
+
+			var _id = $(this).parent().parent().find(".id").val();
+			var _name = $(this).parent().parent().find(".name").val();
+			var _price = $(this).parent().parent().find(".price").val();
+			var _lever = $(this).parent().parent().find(".lever").val();
+			var _class = $(this).parent().parent().find(".class").val();
+			var _bullet = $(this).parent().parent().find(".bullet").val();
+			var _bulletclass = $(this).parent().parent().find(".bulletclass").val();
+			var _spead = $(this).parent().parent().find(".speed").val();
+
+			SmartApps.tokenGame1.setMarketStars(_id, _name, _price, _lever, _class, _bullet, _bulletclass, _spead);
+		});
+
+		var loadBullet = async () => {
+		  var data = await SmartApps.tokenGame1.getBulletMarket(6);
+			var html = '';
+			for(var i =0;i<data.length;i++){
+					html += '<tr>';
+					  html += '    <th scope="row"><input class="form-control id" value="'+data[i].id+'"></th>';
+					  html += '    <td><input class="form-control name" value="'+data[i].name+'"></td>';
+					  html += '    <td><input type="number" class="form-control price" value="'+data[i].price+'"></td>';
+					  html += '    <td><input type="number" class="form-control bullet" value="'+data[i].bullet+'"></td>';
+					  html += '    <td class="text-end"><button class="btn btn-sm btn-primary btnUpdateBullet">Update</button></td>';
+					  html += '  </tr>';
+			}
+			
+			$("#LoadControllerBullet").html(html);
+		};
+		await loadBullet();
+
+		$(".btnUpdateBullet").on("click", function(){
+				var _id = $(this).parent().parent().find(".id").val();
+				var _name = $(this).parent().parent().find(".name").val();
+				var _price = $(this).parent().parent().find(".price").val();
+				var _bullet = $(this).parent().parent().find(".bullet").val();
+				SmartApps.tokenGame1.setMarketBullet(_id, _name, _price, _bullet);
+		});
+
+		var loadLeverData = async () => {
+		  var data = await SmartApps.tokenGame1.getLeverBulder(31);
+			var html = '';
+			for(var i =0;i<data.length;i++){
+				if(i > 0){
+				html += '<tr>';
+					  html += '    <th scope="row"><input class="form-control id" value="'+data[i].id+'"></th>';
+					  html += '    <td><input class="form-control Score" value="'+data[i].Score+'"></td>';
+					  html += '    <td><input class="form-control Bullet" value="'+data[i].Bullet+'"></td>';
+					  html += '    <td><input class="form-control BulletClass" value="'+data[i].BulletClass+'"></td>';
+					  html += '    <td><input class="form-control Speed" value="'+data[i].Speed+'"></td>';
+					  
+					  
+					  html += '    <td class="text-end"><button class="btn btn-sm btn-primary btnUpdateLever">Update</button></td>';
+					  html += '  </tr>';
+					  }
+			}
+			$("#LoadControllerLever").html(html);
+		};
+		await loadLeverData();
+
+		$(".btnUpdateLever").on("click", function(){
+				var _id = $(this).parent().parent().find(".id").val();
+				var _Score = $(this).parent().parent().find(".Score").val();
+				var _Bullet = $(this).parent().parent().find(".Bullet").val();
+				var _BulletClass = $(this).parent().parent().find(".BulletClass").val();
+				var _Speed = $(this).parent().parent().find(".Speed").val();
+				SmartApps.tokenGame1.setLeverBuilder(_id, _Score, _Bullet, _BulletClass,_Speed);
+		});
+
+
+
+		$("#setupfatory").on("click", function(){
+			SmartApps.tokenGame1.connectFactory();
+		});
+		$("#setCurentcy").on("click", function(){
+			SmartApps.tokenGame1.setCurentcy();
+		});
+		$("#setNft").on("click", function(){
+			SmartApps.tokenGame1.setNft();
+		});
+		
+		
+		$("#setAdmin").on("click", function(){
+			var address = $("#adminAddress").val();
+			SmartApps.tokenGame1.addAdmin(address);
+		});
+
+		var loadLeverDataReward = async () => {
+				var reward = await SmartApps.tokenGame1.getRewardLever();
+				var html = '';
+
+				for(var i =0;i<reward.length;i++){
+					
+				
+					html +='<div class="input-group mb-3">';
+					html +='  <button class="btn btn-secondary" type="button">Lever</button>';
+					html +='  <input type="text" class="form-control lever" value="'+reward[i].Lever+'" placeholder="Lever">';
+					html +='  <button class="btn btn-secondary" type="button">Reward</button>';
+					html +='  <input type="text" class="form-control rewardValue" value="'+reward[i].Reward+'" placeholder="Reward Token">';
+					html +='  <button class="btn btn-outline-secondary setReward" type="button">Set Reward</button>';
+					html +='</div>';
+				}
+
+				$(".rewardTable").html(html);
+		}
+
+		await loadLeverDataReward();
+
+		$(".setReward").on("click", function(){
+				var block = $(this).parent();
+				var lever = block.find(".lever").val();
+				var reward = block.find(".rewardValue").val();
+				if(Number(reward) == 0){
+					alert("Error Number Reward");
+					return;
+				}
+				SmartApps.tokenGame1.setRewardLever(lever,reward);
+		});
+		$("#setRewardToken").on("click", function(){
+			var address = $(this).parent().find(".addressTokenReward").val();
+				if(address == ""){
+					alert("Error Address");
+					return;
+				}
+			SmartApps.tokenGame1.setEnableReward(address);
+		});
+		
+	});
+</script>

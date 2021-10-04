@@ -1,0 +1,37 @@
+<section class="bg-white mb-4">
+    <%- include("./components/wallet-balance.ejs") %>
+    <div class="container mb-3">
+    	<h3 class="d-flex justify-content-between">Smart Staking Manager <%if(staking.contract){%><a href="https://bscscan.com/token/<%= staking.contract%>" class="btn btn-md btn-block btn-primary">Contract</a><%}%></h3>
+        <hr>
+    </div>
+
+    <div class="container">
+
+        <div class="row mb-4">
+
+            <div class="col-md-8 col-12">
+              <input type="number" class="form-control form-control-lg" id="tokenvalue" placeholder="Token Value">
+              
+            </div>
+            <div class="col-md-4 col-12"><button class="btn btn-md btn-block btn-primary" data-staking="join" id="basic-addon2">Join Staking</button></div>
+
+        </div>
+
+        <div class="row">
+            <% staking.package.forEach(function(data, index){ %>
+                <div class="col-md-3 mb-3 col-sm-6 col-12">
+                    <div class="border round text-center p-3">
+                        <h6><%= data.name%></h6>
+                        <p>APR : <%= data.apr%>%<br>
+                        NFT : <%= data.nft%>
+                        </p>
+                        <p></p>
+                    </div>
+                </div>
+             <% }); %>
+        </div>
+        
+        
+    </div>
+</section>
+

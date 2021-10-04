@@ -1,0 +1,16 @@
+ <div class="row">
+    <% items.forEach(function(data, index){ %>
+        <div class="col-md-4 mb-3 col-12" id="plance">
+            <div class="shadown border round">
+            	<img src="<%=data.image%>" style="width:100%">
+            	
+            	<hr>
+            	<h5 style="padding-left:15px; padding-right:15px;"><%=data.name%> | #<%=data.tokenId%> </h5>
+            	
+            	<div class="p-4">
+            		<button class="btn btn-primary btn-sm" data-market-cancelsell data-tokenid="<%=data.tokenId%>" type="button">CLOSE SELL</button>
+				</div>
+            </div>
+        </div>
+    <%});%>
+</div>

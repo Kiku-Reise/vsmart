@@ -1,0 +1,141 @@
+<h1 class="title title-s2 text-white">My Battle</h1>
+<div class="row animated" data-animate="fadeInDown" data-delay=".85" id="LoadMyItem"></div>
+<br>
+
+
+<a class="btn btn-primary" href="/app/marketplace">Buy Battlet</a>
+<a class="btn btn-outline-primary" href="/app/mining">Play game</a>
+<script>
+$(document).ready(async function(){
+    
+    var LoadClass = async function(){
+    await SmartApps.tokenGame1.Init();
+        $("#LoadMyItem").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+        var html = '';
+        var data = await SmartApps.tokenGame1.getBalt();
+
+        for(var i =0;i<data.length;i++){
+          var img = data[i].Class;
+          var vip = Number(data[i].Groups);
+          html += '<div class="col-md-4 mb-3 col-6">';
+          html += '          <div class="card">';
+          html += '            <div class="card-body">';
+          if(vip > 0){
+            html += '             <div class="card-vip"><img src="/assets/vip/vip'+vip+'.png" style="width:100%;height:100%;"></div>';
+          }
+          html += '              <img src="/nfts/'+img+'.png" style="min-width:120px;width:100%;height:120px;">';
+          html += '              <b>'+data[i].name+'</b><br>';
+          html += '              Lever : '+data[i].Lever+'<br>';
+          html += '              Bullet : '+data[i].Bullet+'<br>';
+          html += '             <div class="btn-group mb-3" role="group">';
+          html += '              <button class="btn btn-primary btn-sm btnBuyBullet" data-toggle="modal" data-target="#BulletModal" data-tokenid="'+data[i].tokenId+'"><i class="ti ti-shop"></i>Buy Bullet</button></div>';
+          
+          html += '             <div class="btn-group  mb-3" role="group">';
+          html += '              <button class="btn btn-outline-info btn-sm sellSystem" data-lever="'+data[i].Lever+'" data-tokenid="'+data[i].tokenId+'"><i class="ti ti-shop"></i>Sell System</button>';
+          html += '              <button class="btn btn-outline-info btn-sm btnSellMarket" data-lever="'+data[i].Lever+'" data-toggle="modal" data-target="#BalletModalSell" data-tokenid="'+data[i].tokenId+'"><i class="ti ti-shop"></i>Sell Market</button>';
+          html += '            </div>';
+
+         
+
+          html += '            </div>';
+          html += '          </div>';
+          html += '</div>';
+        }
+        
+
+        $("#LoadMyItem").html(html);
+    };
+    await LoadClass();
+
+    $(".btnBuyBullet").on("click", function(){
+        var tokenid = $(this).data("tokenid");
+        
+        $(".btnBuyBulletExe").attr("data-tokenid",tokenid);
+        
+    });
+
+    var dataBullet = await SmartApps.tokenGame1.getBulletMarket(6);
+    
+    var html = '';
+    for(var i =0;i<dataBullet.length;i++){
+        var id = Number(dataBullet[i].id);
+        html += '<div class="col-4 btnBuyBulletExe" data-itemid="'+id+'"><img src="/nfts/bullet/'+id+'.gif" style="width:100%"><b>'+dataBullet[i].name+'</b><br>'+dataBullet[i].price+' <%=token.name%><br>Bullet : '+dataBullet[i].bullet+'</div>';
+    }
+    $(".modal-body .row").html(html);
+
+    $(".btnBuyBulletExe").on("click", function(){
+        var tokenid = $(this).data("tokenid");
+        var itemid = $(this).data("itemid");
+        
+        SmartApps.tokenGame1.buyBullet(tokenid,itemid,0);
+        return false;
+    });
+
+   
+    
+    $(".sellSystem").on("click", function(){
+        var lever = $(this).data("lever");
+        if(lever < 30){
+          SmartApps.Blockchain.notify("Plz Up lever 30");
+        }else{
+          SmartApps.Blockchain.notify("Plz Wait open system");
+        }
+    });
+
+    $(".btnSellMarket").on("click", function(){
+        var lever = $(this).data("lever");
+        if(lever < 5){
+          SmartApps.Blockchain.notify("Plz Up lever 5");
+          return false;
+        }
+    });
+});
+
+
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="BulletModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sellect Bullet</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="BalletModalSell" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter Info</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">
+        
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Price</label>
+          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Price Sell">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Description Item Sell"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send Market</button>
+      </div>
+    </div>
+  </div>
+</div>

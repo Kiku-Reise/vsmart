@@ -1,0 +1,37 @@
+<%- include("./components/banner-pages.html",{name : "AIRDROP PROGRAM", "description" : "List Airdrop token"}) %>
+
+<section class="bg-white">
+    <div class="container">
+        
+        <div class="nk-block nk-block-token">
+            <div class="row">
+            <% items.forEach(function(data, index){ %>
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="/airdrop/<%=data.id%>">
+                            <div class="row">
+                                
+                                <div class="col-md-8 col-12">
+                                    <h4><%=data.name%></h4>
+                                    Active : Payment<br>
+                                    Rating : <em class="ti ti-starts"></em><br>
+                                    Report : <em class="ti ti-report"></em><br>
+                                    Scam : <em class="ti ti-starts"></em><br>
+                                    Start : <em class="ti ti-starts"></em><br>
+                                    End : <em class="ti ti-starts"></em><br>
+                                    Status : <em class="ti ti-starts"></em>
+                                </div>
+                                <div class="col-md-4 col-12"><img src="/upload/banner.png" align="right" style="width:100%;"></div>
+                            </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+            </div>
+        </div>
+            
+    </div>
+</section>

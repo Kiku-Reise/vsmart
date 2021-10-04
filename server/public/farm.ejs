@@ -1,0 +1,356 @@
+
+				
+
+				<div class="row">
+					<div class="col-8">
+						<div class="card">
+							<div class="card-body">
+							FARM : <%=address.AddressContractFarm%><br>
+							Factory : <%=address.AddressContractNFTFactory%>
+							
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<button class="btn btn-lg btn-block btn-fill btn-primary" id="settupfactory">Connect Factory NFT</button>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-8">
+						<div class="card">
+						<div class="card-body">
+						<h4>Session Create</h4>
+						<hr>
+						
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Start</label>
+						    <div class="col-sm-2">
+						      Year
+						      <select type="text" id="starttime_y" class="form-select">
+						      	<% for(var i=2021; i<=2028; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+
+						    <div class="col-sm-2">
+						      Month
+						      <select type="text" id="starttime_m" class="form-select">
+						      	<% for(var i=1; i<=12; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+
+						    <div class="col-sm-2">
+						      Day
+						      <select type="text" id="starttime_d" class="form-select">
+						      	<% for(var i=1; i<=31; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+
+						    <div class="col-sm-2">
+						    	Hour
+						      <select type="text" id="starttime_h" class="form-select">
+						      	<% for(var i=0; i<24; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+
+						    <div class="col-sm-2">
+						    	Min
+						      <select type="text" id="starttime_min" class="form-select">
+						      	<% for(var i=0; i<60; i++) {%>
+						      		<option value="<%=i%>"><%=i%></option>
+						      	<%}%>
+						      </select>
+						    </div>
+						</div>
+
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Period</label>
+						    <div class="col-sm-8">
+						      <input type="number" id="period" name="period" class="form-control" value="">
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-outline-info btn-block">Hour</button>
+						    </div>
+						</div>
+
+						
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Min Deposit</label>
+						    <div class="col-sm-8">
+						      <input type="text" name="deposit" id="deposit" class="form-control" value="100">
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-info btn-block"><%= token.name%></button>
+						    </div>
+						</div>
+
+						
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Total Reward</label>
+						    <div class="col-sm-8">
+						      <input type="text" name="reward" id="reward" class="form-control" value="">
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-info btn-block"><%= token.name%></button>
+						    </div>
+						</div>
+
+						
+
+						
+
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label">Withdraw Lock</label>
+						    
+						    <div class="col-sm-8">
+						    	<select class="form-select" id="lockTimeWithdraw">
+						    		<option value="">No Options</option>
+						    		<option value="1">1h</option>
+						    		<option value="12">12h</option>
+						    		<option value="24">24h</option>
+						    		<option value="48">48h</option>
+						    		<option value="max">Finish Pool</option>
+						    	</select>
+						    </div>
+						    <div class="col-sm-2 d-grid gap-2">
+						    	<button class="btn btn-sm btn-outline-primary btn-block">Hour</button>
+						    </div>
+						</div>
+
+						<div class="mb-3 row">
+						    <label  class="col-sm-2 col-form-label"></label>
+						    <div class="col-sm-10">
+						      <button id="createFarmSession"  class="btn btn-primary" value="">Create Session</button>
+						    </div>
+						</div>
+						
+						</div>
+						</div>
+					</div>
+
+
+					<div class="col-4">
+						<div class="card">
+						<div class="card-body">
+							<h4>Game Image</h4>
+							<hr>
+							
+							<div class="mb-3 row">
+							    <label  class="col-sm-12 col-form-label">Game Background</label>
+							    <div class="col-sm-12">
+							      <select  id="image" class="form-select" value="">
+							      		<% fileBG.forEach(function(data, index){ %>
+							      		<option value="<%=filedir%><%=data%>"><%=filedir%><%=data%></option>
+		  
+		  								<% }); %>
+							      		
+							      </select>
+							    </div>
+							</div>
+
+							<div class="mb-3 row">
+							    <label  class="col-sm-12 col-form-label">Game Header</label>
+							    <div class="col-sm-12">
+							      <select  id="imageHeader" class="form-select" value="">
+							      		<% fileBG.forEach(function(data, index){ %>
+							      		<option value="<%=filedir%><%=data%>"><%=filedir%><%=data%></option>
+		  
+		  								<% }); %>
+							      		
+							      </select>
+							    </div>
+							</div>
+
+							<div class="mb-3 row">
+							    <label  class="col-sm-4 col-form-label">Font Color</label>
+							    <div class="col-sm-4">
+							      <input type="text" name="fontcolor" id="color" class="form-control" value="">
+							    </div>
+							    <div class="col-sm-4 d-grid gap-4">
+							    	<input type="text" name="fontcolor" id="color2" class="form-control" value="">
+							    </div>
+							</div>
+
+
+							<div class="border" style="min-height:160px" id="preview"></div>
+
+							<script>
+								$("#image").on("change", function(){
+									var image = $(this).val();
+									$("#preview").html('<img src="<%-base%>'+image+'" style="width:100%; max-width:100%;">');
+								});
+							</script>
+							
+							<br>
+							<div class="mb-3 row">
+							    
+							    <div class="col-sm-6">
+							      <input type="text"  placeholder="Session ID" lastSessionIds class="form-control" value="">
+							    </div>
+							    <div class="col-sm-6 d-grid gap-6">
+							    	<button id="setDatabase"  class="btn btn-primary" value="">Update Database</button>
+							    </div>
+							</div>
+
+						</div>
+						</div>
+					</div>
+				</div>
+<br>
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body">
+				<h4>Set NFT Reward</h4>
+				<hr>
+				<div class="mb-3 row">
+				    <label  class="col-sm-2 col-form-label">Session ID</label>
+				    <div class="col-sm-8">
+				      <input type="text"  placeholder="Session ID" lastSessionIds class="form-control nftSetSessionId" value="">
+				    </div>
+				    <div class="col-sm-2 d-grid gap-2">
+				    	<button class="btn btn-sm btn-info btn-block">Session ID</button>
+				    </div>
+				</div>
+
+				<div class="mb-3 row">
+				    <label  class="col-sm-2 col-form-label">Support NFT</label>
+				    <div class="col-sm-8">
+				      <select class="form-select" id="allowNft">
+				      	<option value="0">Off</option>
+				      	<option value="1">On</option>
+				      </select>
+				    </div>
+				    <div class="col-sm-2 d-grid gap-2">
+				    	<button class="btn btn-sm btn-info btn-block">On/Off</button>
+				    </div>
+				</div>
+				<div class="mb-3 row">
+				    <label  class="col-sm-2 col-form-label">NFT Reward 1</label>
+				    <div class="col-sm-2">
+				      <input type="text" name="nftreward" id="minDepositNFT1" class="form-control" placeholder="Min Deposit" value="">
+				    </div>
+				    <div class="col-sm-2">
+				      <input type="text" name="nftreward" id="RewardNFT1Lever" placeholder="CAR Lever" class="form-control" value="">
+				    </div>
+				    <div class="col-sm-2 d-grid gap-2">
+				    	<button class="btn btn-sm btn-primary btn-block"><%= token.name%> NFT</button>
+				    </div>
+				    <div class="col-sm-2">
+				    	<select class="form-select" id="TimeNft1Lock">
+				    		<option value="">No Options</option>
+				    		<option value="1">1h</option>
+				    		<option value="12">12h</option>
+				    		<option value="24">24h</option>
+				    		<option value="48">48h</option>
+				    		<option value="max">Finish Pool</option>
+				    	</select>
+				    </div>
+				    <div class="col-sm-2 d-grid gap-2">
+				    	<button class="btn btn-sm btn-outline-primary btn-block">Hour</button>
+				    </div>
+				</div>
+
+
+				<div class="mb-3 row">
+				    <label  class="col-sm-2 col-form-label">NFT Reward 2</label>
+				    <div class="col-sm-2">
+				      <input type="text" name="nftreward" id="minDepositNFT2" placeholder="Min Deposit" class="form-control" value="">
+				    </div>
+				    <div class="col-sm-2">
+				      <input type="text" name="nftreward" id="RewardNFT2Lever" placeholder="CAR Lever" class="form-control" value="">
+				    </div>
+				    <div class="col-sm-2 d-grid gap-2">
+				    	<button class="btn btn-sm btn-primary btn-block"><%= token.name%> NFT</button>
+				    </div>
+				    <div class="col-sm-2">
+				    	<select class="form-select" id="TimeNft2Lock">
+				    		<option value="">No Options</option>
+				    		<option value="1">1h</option>
+				    		<option value="12">12h</option>
+				    		<option value="24">24h</option>
+				    		<option value="48">48h</option>
+				    		<option value="max">Finish Pool</option>
+				    	</select>
+				    </div>
+				    <div class="col-sm-2 d-grid gap-2">
+				    	<button class="btn btn-sm btn-outline-primary btn-block">Hour</button>
+				    </div>
+				</div>
+				<hr>
+				<button id="setNftDatabase"  class="btn btn-primary" value="">Update NFT</button>
+			</div>
+
+		</div>
+		<br>
+
+		<div class="card">
+			<div class="card-body">
+				<h4>Set Name Pool</h4>
+				<hr>
+				<div class="mb-3 row">
+				    <label  class="col-sm-2 col-form-label">Set Name Pool</label>
+				    <div class="col-sm-2">
+				      <input type="text" placeholder="Session ID" id="setPollNameID" lastSessionIds class="form-control" value="">
+				    </div>
+				    <div class="col-sm-6">
+				      <input type="text" placeholder=Name Pool (Max 50 chatter)" class="form-control" id="InputPoolName" value="">
+				    </div>
+				    <div class="col-sm-2">
+				      <button id="setNamePool"  class="btn btn-primary" value="">Update</button>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="card">
+			<div class="card-body">
+				<h4>Set Mutile Pool</h4>
+				<hr>
+				<div class="mb-3 row">
+				    <label  class="col-sm-2 col-form-label">Set Mutile Pool</label>
+				    <div class="col-sm-8">
+				      <input type="text" placeholder="Contract Address" id="ContractAddresssMutiPool" class="form-control" value="">
+				    </div>
+				    <div class="col-sm-2">
+				      <button id="setMutilePool"  class="btn btn-primary" value="">Send Query</button>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="card">
+			<div class="card-body">
+				<h4>Set Min Deposit</h4>
+				<hr>
+				<div class="mb-3 row">
+				    <label  class="col-sm-2 col-form-label">Set Mindeposit</label>
+				    <div class="col-sm-2">
+				      <input type="text" placeholder="Session ID" lastSessionIds id="setMinDepositSessionID" class="form-control" value="">
+				    </div>
+				    <div class="col-sm-6">
+				      <input type="text" placeholder="Number Token Deposit" id="setMinDepositValue" class="form-control" value="">
+				    </div>
+				    <div class="col-sm-2">
+				      <button id="setMinDeposit"  class="btn btn-primary" value="">Update</button>
+				    </div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+			

@@ -1,0 +1,29 @@
+<%- include("./components/banner-pages.html",{name : "SIGNALS AI PROGRAM", "description" : "List trader signal"}) %>
+
+<section class="bg-white">
+    <div class="container">
+        
+        <div class="nk-block nk-block-token">
+            <div class="row">
+            <% items.forEach(function(data, index){ %>
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card">
+                        <img src="/upload/banner.png" class="card-img-top">
+                        <div class="card-body">
+                            
+                                <h4><%=data.name%></h4>
+                                Win : Payment<br>
+                                Loss : <em class="ti ti-starts"></em><br>
+                                Signals : <em class="ti ti-report"></em><br>
+                                Last Active : <em class="ti ti-starts"></em><br>
+                                <a class="btn btn-primary btn-block" href="/trade/<%=data.id%>">Signals</a>
+                            
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+            </div>
+        </div>
+            
+    </div>
+</section>

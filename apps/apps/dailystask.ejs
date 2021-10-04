@@ -1,0 +1,32 @@
+<h1 class="title title-s2 text-white">TOP 10 Reward Today</h1>
+
+<div class="card">
+	<div class="card-body">
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Wallet</th>
+	      <th scope="col">Reward</th>
+	      
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<% for(var i=0; i<10; i++) {%>
+	    <tr>
+	      <th scope="row"><%=i+1%></th>
+	      <td><div style="overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	max-width: 230px;">0x77732a57F6Dd9D6a61d1052831755e513214061b</div></td>
+	      <td class="text-end"><%=200-(i*20)%> <%=token.name%></td>
+	      
+	    </tr>
+	    <%}%>
+	  </tbody>
+	</table>
+
+</div>
+</div>

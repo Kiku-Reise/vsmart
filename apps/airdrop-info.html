@@ -1,0 +1,50 @@
+<%- include("./components/banner-pages.html",{name : "AIRDROP " + items.name, "description" : "List Airdrop token"}) %>
+
+<section class="bg-white">
+    <div class="container">
+        
+        <div class="nk-block nk-block-token">
+            <div class="row">
+                <div class="col-12 col-md-8 mb-3">
+                    <div class="card">
+                        <img src="/upload/banner.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5><%=items.name%> Airdrop Task</h5>
+                            <%=items.contents%>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            Active : Payment<br>
+                            Rating : <em class="ti ti-starts"></em>5<br>
+                            Report : <em class="ti ti-report"></em>100<br>
+                            Scam : <em class="ti ti-starts"></em>No<br>
+                            Start : <em class="ti ti-starts"></em> <%=items.created_at%><br>
+                            End : <em class="ti ti-starts"></em> <%=items.created_at%><br>
+                            Status : <em class="ti ti-starts"></em> Runing<br>
+
+                            <div class="btn-group round" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-outline-primary">Contract</button>
+                              <button type="button" class="btn btn-outline-primary">Add to wallet</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Tools For Member</h4>
+                            <button class="btn btn-primary">Report Scam</button>
+                            <button class="btn btn-primary">Vote</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+            
+    </div>
+</section>

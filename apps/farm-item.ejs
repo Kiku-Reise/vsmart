@@ -1,0 +1,94 @@
+ <div class="row">
+            
+            <% items.forEach(function(data, index){ %>
+
+                <div class="col-md-4 mb-4 col-sm-6 col-12">
+                    <div class="border round text-left p-3">
+                        <h6>#<%= data.log_id%> | <%= data.pool_name%></h6>
+                        <h7>Min Deposit : <%= data.min_deposit%> <%= token.name%></h7>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item d-flex justify-content-between" data-timestart="<%= data.timestart%>" data-period="<%= data.period%>">Start Time: <span><%= data.timestart%></span></li>
+                          <li class="list-group-item d-flex justify-content-between"><b>End Time: </b><span data-timeend="<%= data.timeend%>"><%= data.timeend%></span></li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Period : </b><%- (data.period / 3600).toFixed(2) %> hour</li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Total Reward : </b><%- data.totalReward%> <%= token.name%> </li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Holder : </b><%- data.amount_holder%> <%= token.name%> </li>
+                          <li class="list-group-item d-flex justify-content-between"><b>APR : </b><%= data.apr%>% </li>
+                          <li class="list-group-item d-flex justify-content-between"><b>Reward :</b> <%- (data.reward_token * 3600).toFixed(2)%> <%= token.name%> / 1h , <%= data.reward_nft%> NFT</li>
+                        </ul>
+                        <hr>
+                        
+                        <button class="btn btn-sm btn-info data-info" data-href="/farm/info/<%= data.log_id%>">Join Pool</button>
+                        
+                    </div>
+                    
+                    <div class="modal fade" tabindex="-1" id="FarmDesopit<%= index%>">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Confirm Deposit | <%= data.pool_name%></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Check Your balance <%= token.name%> before confirm.</p>
+                            <input type="number" value="<%= data.min_deposit%>" class="form-control">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-session="<%= data.log_id%>" data-web3="farmdeposit" data-min="<%= data.min_deposit%>">Confirm</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+             <% }); %>
+        </div>
+
+<script src="/assets/js/countdown.js?ver=1930"></script>
+<script>
+jQuery(document).ready(function(){
+
+  var wallet = "";
+  SmartApps.Blockchain.getLoginWallet().then((data) => {
+    wallet = data;
+  });
+  $(".data-info").on("click", function(){
+    var url = $(this).attr("data-href");
+    window.location.href= url + "/" + wallet;
+  });
+
+	$("[data-timestart]").each(function(res){
+		var period = $(this).attr("data-period");
+		periodEx = parseInt(period);
+
+		var timeStart = $(this).attr("data-timestart");
+		var timeEnd = parseInt(timeStart) + parseInt(periodEx);
+		$(this).find("span").html(moment.unix(timeStart).format('MMM D, YYYY, HH:mmA'));
+		
+        var CountFinish = moment.unix(timeEnd).format('YYYY/MM/DD HH:mm:ss');
+        $(this).parent().find("[data-timeend]").html(CountFinish);
+        var parentTabs = $(this).parent().find("[data-timeend]");
+        var parentTabsT = $(this).parent().parent();
+
+        parentTabs.countdown(CountFinish).on('update.countdown', function(event) {
+              var format = '%H:%M:%S';
+              if(event.offset.totalDays > 0) {
+                format = '%-d day%!d ' + format;
+              }
+              if(event.offset.weeks > 0) {
+                format = '%-w week%!w ' + format;
+              }
+              $(this).html(event.strftime(format));
+              parentTabsT.find(".claimOnly").remove();
+            })
+            .on('finish.countdown', function(event) {
+              $(this).html('<span class="text-primary text-wrap">Pool Finish!</span>').parent().addClass('disabled');
+                parentTabsT.find(".data-info").remove();
+            });
+	});
+	
+});
+</script>

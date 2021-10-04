@@ -1,0 +1,60 @@
+<%- include("./components/banner-pages.ejs",{name : "NFT MARKET - "+item.name, "description" : "Support CAR NFT and more contract NFT"}) %>
+<section class="bg-white mb-5">
+ 	<div class="container-market">
+       <div class="row">
+              
+              <div class="col-md-2 col-xs-12">
+                     <%- include("components/categories.ejs") %>
+              </div>
+
+              <div class="col-md-10 col-xs-12">
+                     <h4 class="d-flex justify-content-between"><div><%=item.name%></div><div> <a href="/market" class="btn btn-info">Back Market</a> <button data-market-buy="true" data-tokenid="<%=item.tokenId%>" data-amount="<%=item.price%>" data-contract="<%=item.nft%>" data-money="<%=item.currency%>" data-market-buy="true"  class="btn btn-primary">Buy Now</button></div></h4>
+                     <hr>
+                     <div class="row">
+                            <div class="col-md-6">
+                                   <img src="<%=item.image%>">
+                                   
+                                   <ul class="row attributes">
+                                   <li class="col-12 col-md-4 mb-2">
+                                          <div class="border p-2 rounded">
+                                          EXP : 
+                                          </div>
+                                   </li>
+
+                                   </ul>
+                            </div>
+                            <div class="col-md-6">
+                                   
+                                  
+                                   <div class="d-flex justify-content-between"><b>Seller : </b><%=item.seller%></div>
+                                   <div class="d-flex justify-content-between"><b>Contract : </b><%=item.nft%></div>
+                                   <div class="d-flex justify-content-between">Token ID : #<%=item.tokenId%> <em>Sell on : <%=item.startTime%></em></div>
+                                   
+                                   <ul class="social justify-content-center mt-3 mb-3">
+                                          <%if(social.facebook){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-facebook-f"></em></a></li><%}%>
+                                          <%if(social.twitter){ %><li><a href="<%= social.twitter%>" target="_bank"><em class="social-icon fab fa-twitter"></em></a></li><%}%>
+                                          <%if(social.youtube){ %><li><a href="<%= social.youtube%>" target="_bank"><em class="social-icon fab fa-youtube"></em></a></li><%}%>
+                                          <%if(social.github){ %><li><a href="<%= social.github%>" target="_bank"><em class="social-icon fab fa-github"></em></a></li><%}%>
+                                          <%if(social.bitcoin){ %><li><a href="<%= social.bitcoin%>" target="_bank"><em class="social-icon fab fa-bitcoin"></em></a></li><%}%>
+                                          <%if(social.medium){ %><li><a href="<%= social.medium%>" target="_bank"><em class="social-icon fab fa-medium-m"></em></a></li><%}%>
+                                          <%if(social.telegram){ %><li><a href="<%= social.telegram%>" target="_bank"><em class="social-icon fab fa-telegram"></em></a></li><%}%>
+
+                                   </ul>
+
+                                   <div style="max-height:350px; min-height:150px;"><%=item.description%></div>
+                                   <div class="border p-3 rounded">
+                                   <h5 class="d-flex justify-content-between">
+                                          <div>
+                                                 Price : <%=item.price%> <%=token.name%><br>
+                                                 <span style="font-size:12px; color:#333;">Your Balance : <span class="balance"></span> <%=token.name%></span>
+                                          </div>
+                                          <button class="btn btn-primary" data-tokenid="<%=item.tokenId%>" data-amount="<%=item.price%>"  data-contract="<%=item.nft%>" data-money="<%=item.currency%>" data-market-buy="true" >BUY</button>
+                                   </h5>
+                                   </div>
+                            </div>
+                     </div>
+              </div>
+       </div>
+ 		
+ 	</div>
+ </section>

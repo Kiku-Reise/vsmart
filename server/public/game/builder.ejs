@@ -1,0 +1,138 @@
+<div class="row">
+	<div class="col-3">
+		<table class="table">
+		<tbody id="LoadControllerLever"></tbody>
+		</table>
+	</div>
+	<div class="col-9">
+		
+		<table class="table">
+		<tr>
+		<td colspan=2 id="Sumscore">Score</td>
+		<td><button class="btn btn-primary">Fix Core</button></td>
+		</tr>
+		<tbody>
+			<td>Name</td>
+			<td>Timeout</td>
+			<td>Score</td>
+		</tbody>
+		<tbody id="mapData"></tbody>
+
+		</table>
+
+		<textarea class="form-control" raw=7 aria-label="With textarea"></textarea>
+	</div>
+</div>
+
+
+<script src="/levels.js"></script>
+<script src="/levels.js"></script>
+
+<script>
+  
+  $(document).ready(async function(){
+ 
+ var getS = (data) => {
+ 	// set score
+    var score;
+    if (data == "asteroid") {
+        score = 5;
+        
+     } else if (data ==  "asteroid 3") {
+     	score = 5*3;
+    } else if (data ==  "marine") {
+        score = 10
+    } else if (data ==  "marine 3") {
+        score = 10 * 3
+    
+    } else if (data ==  "scout") {
+        score = 20
+    } else if (data ==  "scout 3") {
+        score = 20 * 3
+    } else if (data ==  "slider") {
+        score = 35
+    }else if (data ==  "slider 3") {
+    	score = 35 * 3
+    } else if (data ==  "squid") {
+        score = 40
+    }else if (data ==  "squid 3") {
+        score = 40 * 3
+    } else if (data ==  "assault") {
+        score = 70
+    }else if (data ==  "assault 3") {
+        score = 70 * 3
+    } else if (data ==  "spider") {
+        score = 100
+    }else if (data ==  "spider 3") {
+        score = 100 * 3
+    } else if (data ==  "brain") {
+        score = 250
+    } else if (data ==  "octopus") {
+        score = 400
+    } else if (data ==  "lurr") {
+        score = 1000
+    }
+    return score;
+ }
+
+  var loadLeverData = async () => {
+  	  await SmartApps.tokenGame1.Init();
+	  var data = await SmartApps.tokenGame1.getLeverBulder(31);
+		var html = '';
+		for(var i =0;i<data.length;i++){
+			if(i > 0){
+			html += '<tr>';
+				  html += '    <th scope="row"><input class="form-control id" value="'+data[i].id+'"></th>';
+				  html += '    <td><input class="form-control Score" value="'+data[i].Score+'"></td>';
+				  html += '    <td><input class="form-control Bullet" value="'+data[i].Bullet+'"></td>';
+				  
+				  
+				  
+				  html += '    <td class="text-end"><button class="btn btn-sm btn-primary buildmap" id-map="'+data[i].id+'"  id-score="'+data[i].Score+'" id-lever="'+data[i].id+'">MAP</button></td>';
+				  html += '  </tr>';
+				  }
+		}
+		$("#LoadControllerLever").html(html);
+	};
+	await loadLeverData();
+
+	$(".buildmap").on("click", function(){
+		var id = $(this).attr("id-map");
+		var idscore = $(this).attr("id-score");
+		var idlever = $(this).attr("id-lever");
+		
+		var dataLoad = levelData[id-1];
+		html = '';
+		var sumscore = 0;
+		for(var i=0;i<dataLoad.length;i++){
+			var name = dataLoad[i].enemy;
+			var timeout = dataLoad[i].timeout;
+			var score = getS(name);
+			sumscore += score;
+			html += '<tr>';
+			 
+			  html += '    <td data-name="">'+name+'</td>';
+			  html += '    <td data-timeout="">'+timeout+'</td>';
+			  html += '    <td data-score="">'+score+'</td>';
+			  html += '  </tr>';
+		}
+
+		$("#Sumscore").html("<b>Lever["+idlever+"</b>] - "+sumscore + " Score - " + dataLoad.length + " object" + " Database : "+idscore+" Score");
+		$("#mapData").html(html);
+
+
+	});
+
+
+
+	});
+
+
+</script>
+
+<style>
+.CodeMirror {
+  border: 1px solid #eee;
+ 
+}
+</style>

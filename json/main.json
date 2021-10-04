@@ -1,0 +1,66 @@
+{
+	"title" : "Smart Token - Service Crypto marketing and trader",
+    "keywork" : "Smart Token - Service Crypto marketing",
+    "description" : "Smart Token - Service Crypto marketing",
+    "banner" : "upload/banner.png",
+    "icoin" : "assets/ico",
+    "base"  : "http://localhost:5000/",
+    "logo" : "upload/logo2.png",
+    "logo2" : "upload/logo1.png",
+    "creator" : "Smart Blockchain",
+    "copyright" : "Smart Crypto - Service Crypto marketing 2021",
+    "version" : "12345",
+
+	"public" : {
+		"farm" :  true,
+		"staking" : true,
+		"game" : true,
+		"ido" : true,
+		"airdrop" : true,
+		"market" : true
+	},
+	"whitepaper" : "/wiper.pdf",
+	"token" : {
+		"name" : "SMT",
+		"contract" : "0xb1beea51ddbc7e99d02b5630e24fd376ee4f9b46",
+		"supply" : "1.000.000",
+		"price" : "0.02",
+		
+		"presell" : {
+			"start" : "2021/09/31",
+			"end" : "",
+			"supply" : "",
+			"price" : ""
+		},
+		
+		"ido" : {
+			"start" : "2021/09/31",
+			"end" : "",
+			"supply" : "",
+			"min" : 0.1,
+			"max" : 10
+		},
+		
+		
+		"airdrop" : {
+			"start" : "2021/09/31",
+			"end" : "2021/09/31",
+			"supply" : "500000",
+			"reward" : "1"
+			
+		}
+
+	},
+	"social" : {
+		"facebook" : "https://fb.com/vsmart.ltd",
+		"twitter" : "https://twitter.com/vsmart.ltd",
+		"github" : "",
+		"youtube" : "",
+		"bitcoin" : "",
+		"medium" : "",
+		"telegram" : "https://t.me/smartiqx",
+		"telegram_channel" : "https://t.me/vsmartchannel",
+		"website" : "https://vsmart.ltd"
+	}
+}
+

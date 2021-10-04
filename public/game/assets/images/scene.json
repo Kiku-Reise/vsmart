@@ -1,0 +1,11 @@
+{"frames": {
+},
+"meta": {
+"app": "http://www.codeandweb.com/texturepacker",
+"version": "1.0",
+"image": "scene.png",
+"format": "RGBA8888",
+"size": {"w":580,"h":516},
+"scale": "1",
+"smartupdate": "$TexturePacker:SmartUpdate:5c25fada509e113b355848fec899cbc2:8600c19f035ceeb33c386d08d8fded76:cbce6b53f0f49e0bf15173c25c41f876$"
+}}

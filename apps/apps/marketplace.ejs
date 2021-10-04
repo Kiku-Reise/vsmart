@@ -1,0 +1,117 @@
+<div class="container-sm">
+
+<div class="row">
+    <div class="col-6 animated upvip" data-animate="fadeInUp" data-delay=".65" data-toggle="modal" data-target="#VipModelModal" data-vip="1"><img src="/dist/game/vip1.png" style="width:100%"></div>
+    <div class="col-6 animated upvip" data-animate="fadeInUp" data-delay=".65" data-toggle="modal" data-target="#VipModelModal" data-vip="2"><img src="/dist/game/vip2.png"  style="width:100%"></div>
+</div>
+
+</div>
+
+<h1 class="title title-s2 text-white">MarketPlace Battle</h1>
+<div  class="container-sm">
+
+<div class="row animated" data-animate="fadeInUp" data-delay=".85" id="LoadItem"></div>
+
+</div>
+
+
+
+<script>
+$(document).ready(async function(){
+    
+    var LoadClass = async function(){
+    await SmartApps.tokenGame1.Init();
+        
+       $("#LoadItem").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+        var html = '';
+        var data = await SmartApps.tokenGame1.getMarketPlate(6);
+        
+        for(var i =0;i<data.length;i++){
+          var img = data[i].class;
+          var id = data[i].id;
+          var bullet = data[i].bullet;
+          var price = data[i].price;
+          html += '<div class="col-md-4 mb-3 col-6"><div class="card-theme btnMint"  data-id="'+id+'"><div class="card-body"><img src="/nfts/'+img+'.png" style="width:100px;"><br>1 NFT<br>'+bullet+' Bullet<br>'+price+' <%=token.name%></div></div></div>';
+        }
+        
+
+        $("#LoadItem").html(html);
+    };
+    await LoadClass();
+
+    $(".btnMint").on("click", function(){
+      var id = $(this).data("id");
+      SmartApps.tokenGame1.buyMarketPlate(id);
+  	});
+
+    
+
+    var LoadClassSelectVip = async function(){
+    await SmartApps.tokenGame1.Init();
+        
+       $("#VipModelModal .modal-body").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+        var html = '';
+        $("#LoadMyItem").html('<div class="preloader"><span class="spinner spinner-round"></span></div>');
+        var html = '';
+        var data = await SmartApps.tokenGame1.getBalt(false);
+        for(var i =0;i<data.length;i++){
+        
+       
+          var img = data[i].Class;
+          html += '<div class="col-md-4 mb-3 col-6">';
+          html += '          <div class="card">';
+          html += '            <div class="card-body updateVup" data-tokenid="'+data[i].tokenId+'">';
+          html += '              <img src="/nfts/'+img+'.png" style="width:120px;height:120px;">';
+          html += '              <b>'+data[i].name+'</b><br>';
+          html += '              Lever : '+data[i].Lever+'<br>';
+          html += '              Bullet : '+data[i].Bullet+'<br>';
+          
+          html += '            </div>';
+          html += '          </div>';
+          html += '</div>';
+        }
+        
+        $("#VipModelModal .modal-body").html(html);
+
+        
+    };
+    await LoadClassSelectVip();
+
+  	$(".upvip").on("click",function(){
+        var isVip = $(this).data("vip");
+        $("#VipModelModal").attr("data-vip",isVip);
+        $("#VipModelModal .modal-title").html('Sellect Ballet Class Up VIP : '+isVip);
+    });
+
+    $("#VipModelModal .updateVup").on("click", function(){
+        var tokenID = $(this).data("tokenid");
+        var VipID = $("#VipModelModal").attr("data-vip");
+        SmartApps.tokenGame1.buyVip(tokenID,VipID);
+        return;
+    });
+    
+
+  	
+});
+
+
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="VipModelModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sellect Ballet Class</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>

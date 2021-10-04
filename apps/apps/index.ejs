@@ -1,0 +1,106 @@
+<div class="banner-social-wrap text-center">
+    <ul class="banner-social banner-social-vertical">
+        <%if(social.facebook){ %><li><a href="<%- social.facebook %>"  target="_bank"><em class="fab fa-facebook-f"></em></a></li><%}%>
+        <%if(social.twitter){ %><li><a href="<%- social.twitter %>"  target="_bank"><em class="fab fa-twitter"></em></a></li><%}%>
+        <%if(social.youtube){ %><li><a href="<%- social.youtube %>"  target="_bank"><em class="fab fa-youtube"></em></a></li><%}%>
+        <%if(social.github){ %><li><a href="<%- social.github %>"  target="_bank"><em class="fab fa-github"></em></a></li><%}%>
+        <%if(social.bitcoin){ %><li><a href="<%- social.bitcoin %>"  target="_bank"><em class="fab fa-bitcoin"></em></a></li><%}%>
+        <%if(social.medium){ %><li><a href="<%- social.medium %>"  target="_bank"><em class="fab fa-medium-m"></em></a></li><%}%>
+        <%if(social.telegram){ %><li><a href="<%= social.telegram%>" target="_bank"><em class="social-icon fab fa-telegram"></em></a></li><%}%>
+    	<%if(social.telegram_channel){ %><li><a href="<%= social.telegram_channel%>" target="_bank"><em class="social-icon fab fa-telegram"></em></a></li><%}%>
+
+    </ul>
+</div>
+<style>
+.devcoin span{
+	width:50%;
+	display:inline-block;
+}
+</style>
+<h1 class="title title-s2 text-white">Welcome to Stars Battle</h1>
+<div class="container-sm">
+	<a class="btn btn-md btn-round icon-metamask text-white" data-address="<%= token.contract%>" data-symbol="<%= token.name%>" data-dec="18" data-logo= "<%= base %>/assets/ico/favicon.ico" data-web3=addwatch>Add Stars Battle to Metamask</a>
+	<div class="row text-start">
+		<div class="col-md-6 col-12 mb-4">
+				<div class="card">
+					<div class="card-body">
+						<b>Token Allocation</b><br>
+							<div class="devcoin">
+						    <span>Total Supply:</span> 10.000.000<br>
+							<span>Airdrop:</span>  1.000.000<br>
+							<span>Presale:</span>   1.000.000<br>
+							<span>IDO:</span>     1.000.000<br>
+							<span>Game play:</span>   3.000.000<br>
+							<span>Farm:</span>     2.000.000<br>
+							<span>Makerting:</span>   1.000.000<br>
+							<span>Development:</span>   1.000.000
+							</div>
+							<hr>
+							<a href="https://bscscan.com/token/<%= token.contract %>" class="btn btn-sm btn-round btn-with-icon btn-primary">
+                                <span>Contact</span> 
+                                <em class="icon fas fa-angle-double-right"></em>
+                            </a>
+
+							<a href="<%- token.whitepaper %>" class="btn btn-sm btn-round btn-with-icon btn-info">
+                                <span>White</span> 
+                                <em class="icon fas fa-angle-double-right"></em>
+                            </a>
+                    </div>
+				</div>
+			
+			
+		</div>
+		
+		<div class="col-md-6 col-12  mb-4">
+			<div class="card">
+					<div class="card-body">
+						<img src="/dist/game/exchange.jpg" style="width:100%">
+					</div>
+				</div>
+			
+		</div>
+
+		<div class="col-md-6 col-12  mb-4">
+			<div class="card">
+					<div class="card-body">
+					Top Reward today
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Wallet</th>
+					      <th scope="col">Reward</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	<% for(var i=0; i<10; i++) {%>
+					    <tr>
+					      <th scope="row"><%=i+1%></th>
+					      <td><div style="overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-width: 180px;">0x77732a57F6Dd9D6a61d1052831755e513214061b</div></td>
+					      <td class="text-end"><%=200-(i*20)%></td>
+					      
+					    </tr>
+					    <%}%>
+					  </tbody>
+					</table>
+					</div>
+				</div>
+			
+		</div>
+
+		<div class="col-md-6 col-12  mb-4">
+			<div class="card">
+				<div class="card-body">
+				<blockquote class="twitter-tweet"><p lang="en" dir="ltr">PLAY REAL GAME, EARN REAL MONEY<a href="https://twitter.com/hashtag/STARS?src=hash&amp;ref_src=twsrc%5Etfw">#STARS</a> <a href="https://twitter.com/hashtag/STARSBATTLE?src=hash&amp;ref_src=twsrc%5Etfw">#STARSBATTLE</a> <a href="https://twitter.com/hashtag/NFTGAME?src=hash&amp;ref_src=twsrc%5Etfw">#NFTGAME</a> <a href="https://twitter.com/hashtag/NFTGAMING?src=hash&amp;ref_src=twsrc%5Etfw">#NFTGAMING</a> <a href="https://twitter.com/hashtag/PLAYTOEARN?src=hash&amp;ref_src=twsrc%5Etfw">#PLAYTOEARN</a> <a href="https://twitter.com/hashtag/P2Egaming?src=hash&amp;ref_src=twsrc%5Etfw">#P2Egaming</a> <a href="https://twitter.com/hashtag/P2E?src=hash&amp;ref_src=twsrc%5Etfw">#P2E</a> <a href="https://twitter.com/hashtag/Play2Earn?src=hash&amp;ref_src=twsrc%5Etfw">#Play2Earn</a> <a href="https://t.co/G8t3bvZAX9">pic.twitter.com/G8t3bvZAX9</a></p>&mdash; Stars Battle - NFT Game (@StarsBattle_co) <a href="https://twitter.com/StarsBattle_co/status/1441290620362919937?ref_src=twsrc%5Etfw">September 24, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
