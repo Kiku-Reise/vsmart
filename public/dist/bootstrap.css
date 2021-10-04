@@ -11118,6 +11118,14 @@ ul {
   padding: none;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(-bs--primary);
+}
+
 /** 01. Fonts */
 @font-face {
   font-family: "Roboto";

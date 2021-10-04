@@ -20,7 +20,7 @@ const prefix = "/airdrop";
 router.get(prefix, async (req, res) => {
 	 const dataMain = fsFile.readJSONFile('main.json');
 	 app.set('layout', './layout/pages');
-	 let data = await db.dbQuery("SELECT * FROM airdrop_token ORDER BY id DESC LIMIT 10");
+	 let data = await db.dbQuery("SELECT * FROM airdrop_token ORDER BY id DESC LIMIT 12");
 	 
 	 dataMain.items = [];
 	 if(data != undefined){
@@ -32,9 +32,15 @@ router.get(prefix, async (req, res) => {
 
 router.get(prefix + "/:id", async (req, res) => {
 	 const id = req.params.id;
-	 console.log(id);
+
 	 const dataMain = fsFile.readJSONFile('main.json');
+	 dataMain.loadJS = [];
 	 app.set('layout', './layout/pages');
+
+	 if(id == "create"){
+	 	return res.render("airdrop-create",dataMain);
+	 }
+
 	 let data = await db.dbQuery("SELECT * FROM airdrop_token WHERE id='"+id+"' ORDER BY id DESC LIMIT 1",true);
 	 
 	 dataMain.items = [];
@@ -42,9 +48,10 @@ router.get(prefix + "/:id", async (req, res) => {
 	 	dataMain.items = data;
 	 }
 
-	 dataMain.loadJS = [];
+	 
 	 res.render("airdrop-info",dataMain);
 });
+
 
 app.use(router);
 module.exports.app = app;

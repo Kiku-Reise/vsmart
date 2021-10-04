@@ -1,4 +1,4 @@
-<%- include("./components/banner-pages.html",{name : "AIRDROP PROGRAM", "description" : "List Airdrop token"}) %>
+<%- include("./components/banner-pages.html",{name : "AIRDROP PROGRAM", "description" : "<a href='/airdrop/create' class='btn btn-primary btn-round btn-with-icon' href='/'>Create Airdrop</a>"}) %>
 
 <section class="bg-white">
     <div class="container">
@@ -7,27 +7,24 @@
             <div class="row">
             <% items.forEach(function(data, index){ %>
                 <div class="col-12 col-md-4 mb-3">
+                    <a href="/airdrop/<%=data.id%>">
                     <div class="card">
+                        
+                        <img src="/upload/banner.png" align="right" class="card-img-top">
                         <div class="card-body">
-                            <a href="/airdrop/<%=data.id%>">
-                            <div class="row">
-                                
-                                <div class="col-md-8 col-12">
-                                    <h4><%=data.name%></h4>
-                                    Active : Payment<br>
-                                    Rating : <em class="ti ti-starts"></em><br>
-                                    Report : <em class="ti ti-report"></em><br>
-                                    Scam : <em class="ti ti-starts"></em><br>
-                                    Start : <em class="ti ti-starts"></em><br>
-                                    End : <em class="ti ti-starts"></em><br>
-                                    Status : <em class="ti ti-starts"></em>
-                                </div>
-                                <div class="col-md-4 col-12"><img src="/upload/banner.png" align="right" style="width:100%;"></div>
-                            </div>
-                            </a>
+
+                            <h4><%=data.name%></h4>
+                            <em class="ti ti-star"></em><em class="ti ti-star"></em><em class="ti ti-star"></em><em class="ti ti-star"></em><em class="ti ti-star"></em><br>
+                            Active : Payment<br>
+                            
+                            <em class="ti ti-calendar"></em> Start : <%=data.start_date%><br>
+                            <em class="ti ti-calendar"></em> End : <em class="ti ti-starts"></em> <%=data.end_date%><br>
+                            Status : Airdrop Live
+                            
                             
                         </div>
                     </div>
+                    </a>
                 </div>
             <% }) %>
             </div>

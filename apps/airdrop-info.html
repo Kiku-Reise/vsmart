@@ -6,11 +6,18 @@
         <div class="nk-block nk-block-token">
             <div class="row">
                 <div class="col-12 col-md-8 mb-3">
-                    <div class="card">
+                    <div class="card  mb-3">
                         <img src="/upload/banner.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5><%=items.name%> Airdrop Task</h5>
                             <%=items.contents%>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <div id="disqus_thread"></div>
                         </div>
                     </div>
                 </div>
@@ -18,26 +25,49 @@
                 <div class="col-12 col-md-4 mb-3">
                     <div class="card mb-4">
                         <div class="card-body">
-                            Active : Payment<br>
-                            Rating : <em class="ti ti-starts"></em>5<br>
-                            Report : <em class="ti ti-report"></em>100<br>
-                            Scam : <em class="ti ti-starts"></em>No<br>
-                            Start : <em class="ti ti-starts"></em> <%=items.created_at%><br>
-                            End : <em class="ti ti-starts"></em> <%=items.created_at%><br>
-                            Status : <em class="ti ti-starts"></em> Runing<br>
+                            <h5 class="title title-s3">
+                                <em class="ti ti-star"></em><em class="ti ti-star"></em><em class="ti ti-star"></em><em class="ti ti-star"></em><em class="ti ti-star"></em>
+                            </h5>
+                            <em class="ti ti-credit-card"></em> Active : Payment<br>
+                            <em class="ti ti-direction"></em> Type : Claim<br>
+                            <em class="ti ti-tag"></em> Report : 100<br>
+                            <em class="ti ti-thumb-down"></em> Scam :  No<br>
+                            <em class="ti ti-calendar"></em> Start : <em class="ti ti-starts"></em> <%=items.start_date%><br>
+                            <em class="ti ti-calendar"></em>  End : <em class="ti ti-starts"></em> <%=items.end_date%><br>
+                            Status : Airdrop Live<br>
+                            <br>
+                            <div class="btn-group round mb-3" style="width:100%" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-outline-primary"><i class="ti ti-wallet"></i> Contract</button>
+                              <button type="button" class="btn btn-outline-primary"><i class="ti ti-plus"></i> Add to wallet</button>
+                            </div>
 
-                            <div class="btn-group round" role="group" aria-label="Basic example">
-                              <button type="button" class="btn btn-outline-primary">Contract</button>
-                              <button type="button" class="btn btn-outline-primary">Add to wallet</button>
+                           
+                            <div class="btn-group round" style="width:100%" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-outline-primary"><i class="ti ti-wallet"></i> Airdrop Bot</button>
+                              <button type="button" class="btn btn-outline-primary"><i class="ti ti-plus"></i> Airdrop Contract</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card mb-3">
                         <div class="card-body">
                             <h4>Tools For Member</h4>
-                            <button class="btn btn-primary">Report Scam</button>
-                            <button class="btn btn-primary">Vote</button>
+                            <button class="btn btn-primary"><em class="ti ti-thumb-down"></em> Report Scam</button>
+                            <button class="btn btn-primary"><em class="ti ti-thumb-up"></em>Vote</button>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <%- include("./components/social-share.html",{shareurl : "AIRDROP ", name : "List Airdrop token", source : "", description : ""}) %>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4>Project Info</h4>
+                            Website : <br>
+                            Tearm : <br>
+                            Exchange : 
                         </div>
                     </div>
 
@@ -48,3 +78,24 @@
             
     </div>
 </section>
+
+
+
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://smart-crypto.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
