@@ -59,7 +59,7 @@ async function sleep(millis) {
             //console.log(getmsg);
             
         });
-        await sleep(10000);
+        await sleep(60000);
       }
       
       
