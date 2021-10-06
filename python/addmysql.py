@@ -57,6 +57,7 @@ while True:
 	
 	clnt.connect()
 	if not clnt.is_user_authorized():
+		clnt.disconnect()
 		break
 	clnt.start()
 	target_entity = clnt.get_entity(target)
@@ -66,9 +67,12 @@ while True:
 	peer_flood_status = 0
 	mycursor.execute("SELECT id, hash, username, join_by FROM telegram_user WHERE join_by='' AND sms=0 LIMIT 5")
 	myresult = mycursor.fetchall()
+	
 	for user in myresult:
-		time.sleep(5)
-		
+		time.sleep(15)
+		if peer_flood_status == 10:
+			print(f'Too many Peer Flood Errors! Closing session...')
+			break
 		try:
 			user_to_add = clnt.get_input_entity(user[2])
 			clnt(InviteToChannelRequest(target_details, [user_to_add]))
@@ -101,7 +105,7 @@ while True:
 			print(f'User: {acc_name} -- Settings User can not add, Send msg {msg}, SQL : {sql}')
 			continue
 		except PeerFloodError:
-			print(f'Gioi han thoi gian can nghi ngoi mot thoi gian')
+			print(f'Gioi han thoi gian can nghi ngoi mot thoi gian {peer_flood_status}')
 			peer_flood_status += 1
 			continue
 		except ChatWriteForbiddenError:
