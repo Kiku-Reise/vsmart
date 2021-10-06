@@ -34,7 +34,7 @@ async function sleep(millis) {
       var channel = ["airdropinspector","airdropo", "Airdrop"];
       for (var i = 0; i < channel.length; i++) {
         let item = channel[i];
-        await client.getMessages(item, limit=1).then((result) => {
+        await client.getMessages(item, limit=1).then(async (result) => {
 
             let getmsg = result.pop();
             let id = getmsg.id;
