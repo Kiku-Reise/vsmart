@@ -31,18 +31,33 @@ async function sleep(millis) {
   //await client.sendMessage("me", { message: "Hello!" });
   //console.log(client.is_user_authorized());
   setInterval(async function(){
-      var channel = ["airdropo"];
+      var channel = ["airdropinspector","airdropo", "Airdrop"];
       for (var i = 0; i < channel.length; i++) {
         let item = channel[i];
         await client.getMessages(item, limit=1).then((result) => {
+
             let getmsg = result.pop();
-            //console.log(getmsg);
-            if(getmsg.message != undefined){
-              mysqlText(getmsg.message, getmsg.entities, item);
-             
-              //console.log("Media : ",getmsg.media);
-              
+            let id = getmsg.id;
+            var rid = 0;
+            if (fs.existsSync("./"+item+".txt")) {
+              rid = fs.readFileSync("./"+item+".txt").toString(); 
+              fs.writeFileSync("./"+item+".txt", id);
+              console.log(rid)
+            }else{
+              fs.writeFileSync("./"+item+".txt", id);
             }
+            
+            if(id > rid){
+                if(getmsg.message != undefined){
+                  var text = makeDataSQL(getmsg.message);
+                 
+                  await client.sendPhoto('vsmartchannel', 'https://vsmart.ltd/upload/banner.png', { caption: text, disableWebPagePreview: true,
+                    disableNotification: false,
+                    parseMode: "html" });
+                }
+            }
+            //console.log(getmsg);
+            
         });
         await sleep(10000);
       }
@@ -79,51 +94,52 @@ const mysqlText = async (msg, entities, channel) => {
 }
 
 const makeDataSQL = (msg) => {
-  var str = msg.replace(/\r?\n}|\r}|\n\n}/g, "}\n");
+  var str = msg.replace(/\r?\n>|\r\>|\n\n>/g, ">\n");
+  
   var lower = str.toLowerCase();
   var upper = str.toUpperCase();
 
     var res = "";
     for(var i=0; i<lower.length; ++i) {
-        if(lower[i] != upper[i] || lower[i].trim() === '' || lower[i] == '{' || lower[i] == '}' || lower[i] == ':' || lower[i] == '/' || lower[i] == '"' || lower[i] == '[' || lower[i] == ']')
+        if(lower[i] != upper[i] || lower[i].trim() === '' || lower[i] == '{' || lower[i] == '}' || lower[i] == ':' || lower[i] == '/' || lower[i] == '-' || lower[i] == '"' || lower[i] == '[' || lower[i] == ']' 
+          || lower[i]== '0' || lower[i]== '1' || lower[i]== '2' || lower[i]== '3' || lower[i]== '4' || lower[i]== '5' || lower[i]== '6' || lower[i]== '7' || lower[i]== '8' || lower[i]== '9' || lower[i]== ',' || lower[i]== '$'
+          || lower[i]== '>' || lower[i]== '<' || lower[i]== '=' || lower[i]== '?'
+          )
             res += str[i];
     }
   
-
-  return res;
+  
+ 
+   return res;
 }
 
 
-const getLint = (msg, obj) => {
+const getLint = (msg) => {
   //console.log(msg);
-  msg = msg.replace(' ','').toLowerCase();
-  console.log(msg);
-  if(msg.indexOf("newairdrop") > 0 || msg.indexOf("airdrop") > 0){
-       
-      return {token : obj.url};
+  var msgArray = msg.split(/\r?\n/);
+  obj = {};
+  for (var i = 0; i < msgArray.length; i++) {
+     var ex = msgArray[i].split(':');
+     var keyTest = ex[0];
+     if(keyTest.indexOf('Airdrop:') > 0){
+        obj.token = ex[1];
+     }
+     if(keyTest.indexOf('Value:') > 0){
+        obj.reward = ex[1];
+     }
+     if(keyTest.indexOf('Referral:') > 0){
+        obj.referral = ex[1];
+     }
+     if(keyTest.indexOf('Exchange:') > 0){
+        obj.exchange = ex[1];
+     }
+     if(keyTest.indexOf('Audit:') > 0){
+        obj.audit = ex[1];
+     }
   }
-  if(msg.indexOf("Note:") > 0){
-      return {node : obj.url};
-  }
-  if(msg.indexOf("Website")  > 0){
-      return {website : obj.url};
-  }
-  if(msg.indexOf("Reward") > 0){
-      return {reward : obj.url};
-  }
-  if(msg.indexOf("Refer") > 0){
-      return {refer : obj.url};
-  }
-  if(msg.indexOf("Rating") > 0){
-      return {rating : obj.url};
-  }
-  if(msg.indexOf("market") > 0){
-      return {market : obj.url};
-  }
+
   
-  if(msg.indexOf("Airdrop Link") > 0 || msg.indexOf("airdrop page") > 0){
-      return {bot : obj.url};
-  }
+  return msg;
 }
 
 const makeData = (msg, replace) => {
@@ -140,7 +156,7 @@ const makeData = (msg, replace) => {
     stringReplace.push(substring);
     //console.log(substring);
     if(item.className == "MessageEntityTextUrl"){
-      substring = '[url : "'+item.url+'", text : "'+substring+'"]';
+      substring = '<a href="'+item.url+'">'+substring+'</a>';
       //substring = '{'+substring.replace(' ','')+'}';
       //if(keyString != "" && keyString != undefined) dataPase.push(keyString);
     }
