@@ -51,7 +51,7 @@ async function sleep(millis) {
                 if(getmsg.message != undefined){
                   var text = makeDataSQL(getmsg.message);
                  
-                  await client.sendMessage('vsmartchannel', { message: text, photo='https://vsmart.ltd/upload/banner.png', disableWebPagePreview: true,
+                  await client.sendMessage('vsmartchannel', { message: text, photo : ['https://vsmart.ltd/upload/banner.png'], disableWebPagePreview: true,
                     disableNotification: false,
                     parseMode: "html" });
                 }
