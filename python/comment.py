@@ -150,7 +150,7 @@ while True:
 		print(f'Post no reply')
 
     
-	time.sleep(random.randint(60, 180))
+	time.sleep(random.randint(180, 600))
 	clnt.disconnect()
-	time.sleep(random.randint(60, 180))
+	time.sleep(random.randint(180, 600))
 
