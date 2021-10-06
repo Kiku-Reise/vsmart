@@ -8,6 +8,7 @@ var pool  = mysql.createPool({
 	database: config.db_config.database
 });
 
+module.exports.pool = pool;
 module.exports.dbQuery = async (sql, rows=false) =>{
 	return new Promise(function(resolve, reject){
 		pool.query(sql,function (error, results){

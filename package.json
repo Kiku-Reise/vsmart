@@ -14,7 +14,7 @@
     "game1": "node ./node_modules/gulp/bin/gulp.js game1js",
     "watch": "webpack-cli --watch",
     "module": "browserify -t brfs --standalone apps public/dev/client.js -o public/dist/extract.js",
-    "telegram": "node telegram.js",
+    "telegram": "node telegramscrap.js --unhandled-rejections=strict",
     "socket": "node socket.js"
   },
   "babel": {
@@ -72,6 +72,7 @@
     "http-browserify": "^1.7.0",
     "http-proxy": "^1.18.1",
     "https-browserify": "^1.0.0",
+    "input": "^1.0.1",
     "jquery": "^3.6.0",
     "jquery.countdown": "^1.2.8",
     "lodash": "^4.17.21",
