@@ -368,7 +368,7 @@ SmartApps = (function (SmartApps, $, window) {
 		      package: WalletConnectProvider,
 		      options: {
 		        // Mikko's test key - don't copy as your mileage may vary
-		        infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
+		        infuraId: "669981d1b5994165bcaedcc5cd1f6da4",
 		      }
 		    },
 
@@ -385,6 +385,13 @@ SmartApps = (function (SmartApps, $, window) {
 		    cacheProvider: true, // optional
 		    providerOptions, // required
 		    disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+		    theme: {
+			    background: "rgb(39, 49, 56)",
+			    main: "rgb(199, 199, 199)",
+			    secondary: "rgb(136, 136, 136)",
+			    border: "rgba(195, 195, 195, 0.14)",
+			    hover: "rgb(16, 26, 32)"
+			  }
 		  });
 		//web3os = new Web3(web3Modal);
 

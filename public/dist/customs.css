@@ -14,17 +14,21 @@
 	z-index: 9 !important;
 	position: fixed;
 }
-#walletconnect-wrapper{
-	position: fixed;
-	z-index: 10;
-}
+
 
 .walletconnect-qrcode__base.animated {
     
 		visibility: visible !important;
 
 }
-
+.topHeader{
+	-webkit-border-top-left-radius: 20px;
+-webkit-border-top-right-radius: 20px;
+-moz-border-radius-topleft: 20px;
+-moz-border-radius-topright: 20px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+}
 
 
 .header-logo{

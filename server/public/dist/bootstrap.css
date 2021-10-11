@@ -13225,6 +13225,10 @@ a:hover {
     font-size: 1.75rem;
     line-height: 1.5;
   }
+
+  .banner-page .banner-wrap {
+    padding: 75px 0;
+  }
 }
 @media (min-width: 576px) {
   .banner-gap-b3 {
@@ -13248,6 +13252,10 @@ a:hover {
   .banner-fs .banner-wrap {
     padding-top: 70px;
     padding-bottom: 70px;
+  }
+
+  .banner-page .banner-wrap {
+    padding: 75px 0;
   }
 }
 @media (min-width: 768px) {

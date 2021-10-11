@@ -26,10 +26,14 @@ async function sleep(millis) {
         console.log("Error : ", err)
       },
   });
+  await client.connect();
   console.log("You should now be connected.");
-  console.log(client.session.save()); // Save this string to avoid logging in again
+  client.addEventHandler((update) =>{
+    console.log(update);
+  });
   //await client.sendMessage("me", { message: "Hello!" });
   //console.log(client.is_user_authorized());
+  /*
   setInterval(async function(){
       var channel = ["airdropo"];
       for (var i = 0; i < channel.length; i++) {
@@ -52,8 +56,10 @@ async function sleep(millis) {
       
         
   }, 30000);
+  */
 })();
-
+async function eventPrint(event) {
+};
 //connectApi();
 //setInterval(readData, 60000);
 
