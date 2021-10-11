@@ -28,6 +28,8 @@ app.set('views', path.join(__dirname, '/admin'))
 app.use(express.static(path.join(__dirname, '/admin/public')));
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
+app.set('layout', __dirname, '/admin/layout');
+
 //app.use(partials());
 app.use(EJSLayout);
 app.use(bodyParser.json());

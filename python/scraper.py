@@ -38,15 +38,7 @@ def clr():
 clr()
 banner()
 print(f'  {r}Version: {w}2.5 {r}| Author: {w}Cryptonian{rs}\n')
-f = open('vars.txt', 'rb')
-accs = []
-while True:
-    try:
-        accs.append(pickle.load(f))
-    except EOFError:
-        f.close()
-        break
-print(f'{INPUT}{cy} Choose an account to scrape members\n')
+
 i = 0
 
 client = TelegramClient(f'sessions/+84932013138',  3910389 , '86f861352f0ab76a251866059a6adbd6')
@@ -81,25 +73,17 @@ select = 'y'
 with open("members/members.csv", "w", encoding='UTF-8') as f:
     writer = csv.writer(f, delimiter=",", lineterminator="\n")
     writer.writerow(['username', 'userid', 'accesshash','status', 'group', 'groupid', 'add_ready','add_by'])
-    if select == 'y':
-        for member in members:
-            accept = 'online'
-            if not member.status == UserStatusRecently():
-                accept = 'offline'
-            if accept == 'online':
-                if member.username:
-                    username = member.username
-                else:
-                    username = ''
-                writer.writerow([username, member.id, member.access_hash, accept, group.title, group.id,0,0])
-        print(f'{success}{lg} Filtered by {w}LastSeenRecently')
-    else:
-        for member in members:
+    for member in members:
+        accept = 'online'
+        if not member.status == UserStatusRecently():
+            accept = 'offline'
+        if accept == 'online':
             if member.username:
                 username = member.username
             else:
                 username = ''
-            writer.writerow([username, member.id, member.access_hash, group.title, group.id])
+            writer.writerow([username, member.id, member.access_hash, accept, group.title, group.id,0,0])
+        print(f'{success}{lg} Filtered by {w}LastSeenRecently')
 f.close()
 print(f'{success}{lg} Scraping Successful{rs}')
 input('\nPress enter to exit...')

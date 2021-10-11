@@ -10,6 +10,22 @@
 	}
 	
 }
+#WEB3_CONNECT_MODAL_ID{
+	z-index: 9 !important;
+	position: fixed;
+}
+#walletconnect-wrapper{
+	position: fixed;
+	z-index: 10;
+}
+
+.walletconnect-qrcode__base.animated {
+    
+		visibility: visible !important;
+
+}
+
+
 
 .header-logo{
 	margin: 0px !important;

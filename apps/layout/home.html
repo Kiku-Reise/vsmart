@@ -102,10 +102,15 @@
 
 <script type="text/javascript" src="/assets/js/scripts.js?ver=<%- version%>"></script>
 <script type="text/javascript" src="/assets/js/charts.js?ver=<%- version%>"></script>
+
+<script type="module"  src="/dist/web3.js?ver=<%- version%>"></script>
 <script type="text/javascript"  src="/dist/apps.js?ver=<%- version%>"></script>
+
+
 <% loadJS.forEach(function(data, index){ %>
     <script type="text/javascript"  src="/dist/<%=data%>?ver=<%- version%>"></script>
     <%});%>
+
 </body>
 
 </html>

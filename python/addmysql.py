@@ -29,14 +29,7 @@ import pickle
 from datetime import datetime, timedelta
 import mysql.connector
 
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="root",
-  database="airdroptoken"
-)
 
-mycursor = mydb.cursor()
 init()
 accounts = []
 f = open('vars.txt', 'rb')
@@ -51,6 +44,14 @@ target = "https://t.me/smartiqx"
 
 while True:
 	phn = choice(accounts)[0]
+	mydb = mysql.connector.connect(
+	  host="localhost",
+	  user="root",
+	  password="root",
+	  database="airdroptoken"
+	)
+
+	mycursor = mydb.cursor()
 	print(f'Connect : {phn}')
 	clnt = TelegramClient(f'sessions/{phn}', 3910389, '86f861352f0ab76a251866059a6adbd6')
 	
@@ -132,5 +133,5 @@ while True:
 			print(f'{e}')
 			continue
 	clnt.disconnect()
-
+	mydb.disconnect();
 	time.sleep(random.randrange(300, 600))

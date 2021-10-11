@@ -31,40 +31,27 @@ async function sleep(millis) {
   //await client.sendMessage("me", { message: "Hello!" });
   //console.log(client.is_user_authorized());
   setInterval(async function(){
-      var channel = ["airdropinspector","airdropo", "Airdrop"];
+      var channel = ["airdropo"];
       for (var i = 0; i < channel.length; i++) {
         let item = channel[i];
-        await client.getMessages(item, limit=1).then(async (result) => {
+        await client.getMessages(item, limit=1).then((result) => {
 
             let getmsg = result.pop();
-            let id = getmsg.id;
-            var rid = 0;
-            if (fs.existsSync("./"+item+".txt")) {
-              rid = fs.readFileSync("./"+item+".txt").toString(); 
-              fs.writeFileSync("./"+item+".txt", id);
-              console.log(rid)
-            }else{
-              fs.writeFileSync("./"+item+".txt", id);
-            }
             
-            if(id > rid){
-                if(getmsg.message != undefined){
-                  //var text = makeDataSQL(getmsg.message);
-                 
-                  await client.sendMessage('vsmartchannel', { message: getmsg.message, photo : ['https://vsmart.ltd/upload/banner.png'], disableWebPagePreview: true,
-                    disableNotification: false,
-                    parseMode: "html" });
-                }
-            }
             //console.log(getmsg);
-            
+            if(getmsg.message != undefined){
+              var text = makeData(getmsg.message, getmsg.entities);
+              fs.writeFileSync("./data.txt", text);
+              console.log("Media : ",text);
+              
+            }
         });
-        await sleep(60000);
+        await sleep(10000);
       }
       
       
         
-  }, 60000);
+  }, 30000);
 })();
 
 //connectApi();
@@ -76,7 +63,8 @@ const mysqlText = async (msg, entities, channel) => {
   //console.log(converHtml.msg);
   //var sql = "INSERT INTO `airdrop_token` SET contents="+db.pool.escape(textMysql);
   //console.log(converHtml.data);
-  console.log(textMysql);
+  fs.writeFileSync("./data.txt", msg);
+  console.log(msg);
   //await db.dbQuery(sql);
 /*
   var msgArray = converHtml.split(/\r?\n/);
@@ -110,7 +98,7 @@ const makeDataSQL = (msg) => {
   
   
  
-   return res;
+  console.log(res);
 }
 
 
@@ -152,22 +140,31 @@ const makeData = (msg, replace) => {
   var dataPase = [];
   replace.forEach(function(item) { 
     //console.log(item.offset);
-    var substring = msg.substr(item.offset, item.length);
-    stringReplace.push(substring);
+    
+    //stringReplace.push(substring);
     //console.log(substring);
+
     if(item.className == "MessageEntityTextUrl"){
-      substring = '<a href="'+item.url+'">'+substring+'</a>';
+      var substring = msg.slice(item.offset, item.offset + item.length);
+      substring = substring.replace(/\r?\n| |\n\n/g, "");
+      console.log(item, "Sub : ",substring);
+      var nsubstring = substring+'-|-<a href="'+item.url+'">'+substring+'</a>';
+      stringMsg.push(nsubstring)
+      //msg = msg.replace(substring, nsubstring);
       //substring = '{'+substring.replace(' ','')+'}';
       //if(keyString != "" && keyString != undefined) dataPase.push(keyString);
     }
     
-    stringMsg.push(substring)
+    //stringMsg.push(substring)
 
   });
   
-  stringReplace.forEach(function(item, index) { 
-     msg = msg.replace(item, stringMsg[index]);
+  stringMsg.forEach(function(item) { 
+     var item_line = item.replace(/\r?\n|\n\n/g, "");
+     var msgArray = item_line.split('-|-');
+     msg = msg.replace(msgArray[0], msgArray[1]);
   });
-  //console.log(msg);
-  return {msg : msg, data : dataPase};
+  
+  console.log(stringMsg);
+  return msg;
 }

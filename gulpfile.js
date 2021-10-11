@@ -86,14 +86,26 @@ gulp.task('game', function() {
 
 gulp.task('web3', function() {
     
-    return gulp.src([
-            'node_modules/web3/dist/web3.min.js',
+    gulp.src([
             'node_modules/socket.io/client-dist/socket.io.js',
-            'node_modules/web3modal/dist/index.js',
+            'node_modules/web3/dist/web3.min.js',
             'node_modules/moment/dist/moment.js',
             'node_modules/axios/dist/axios.js',
+        ])
+        .pipe(concat('web3.js'))
+        //.pipe(uglify())
+        .pipe(gulp.dest("public/dist"))
+        .pipe(browserSync.stream());
+
+    return gulp.src([
+            
+            'node_modules/web3modal/dist/index.js',
+            'node_modules/evm-chains/dist/umd/index.min.js',
+            'node_modules/@walletconnect/web3-provider/dist/umd/index.min.js',
+            'node_modules/fortmatic/dist/fortmatic.js',
+            
             'dev/blockchain_dev.js',
-            'dev/token.js',
+            //'dev/token.js',
             //'dev/airdrop.js',
             //'dev/presell.js',
             //'dev/ido.js',
@@ -101,7 +113,7 @@ gulp.task('web3', function() {
             //'dev/client.js'
         ])
         .pipe(concat('apps.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest("public/dist"))
         .pipe(browserSync.stream());
     
@@ -287,7 +299,7 @@ gulp.task('game1js', function() {
 });
 //gulp.task('clean', () => del(['data/dev/assent/js/*.js', 'data/dev/assent/css/*.css']));
 
-gulp.task('default', gulp.series(['blockchain','web3','web3admin','bootstrap','game1','game','airdrop','ido','presell','farm','market'],function(done) { 
+gulp.task('default', gulp.series(['blockchain','web3','web3admin','bootstrap'],function(done) { 
     // default task code here
     done();
 }));
