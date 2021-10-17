@@ -1,0 +1,134 @@
+<h4 class="d-flex justify-content-between">Market Plance<div> <button class="btn btn-primary btn-sm" data-content='{"id" : "0", "banner":"/static/banner.png", "name" : "Name", "capdo" : "0", "tieuchuan":"3", "sodem":"0", "loaiphong":"0", "sonam":"0", "trumoinam" : "0"}' data-bs-toggle="modal" data-bs-target="#CreateModel">Create</button>  <a class="btn btn-primary btn-sm">Sync Blockchian</a></div></h4>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+	<% items.forEach(function(data, index){ %>
+  <div class="col">
+    <div class="card">
+      <img src="/static/banner.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%=data.name%></h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary btn-sm" data-content='{"id":"<%=data.id%>", "banner":"<%=data.banner%>", "name" : "<%=data.name%>", "capdo" : "<%=data.capdo%>", "tieuchuan":"<%=data.tieuchuan%>", "sodem":"<%=data.sodem%>", "loaiphong":"<%=data.loaiphong%>", "sonam":"<%=data.sonam%>", "trumoinam" : "<%=data.trumoinam%>"}' data-bs-toggle="modal" data-bs-target="#CreateModel">Edit</a> <a class="btn btn-primary btn-sm">Delete</a> 
+      </div>
+    </div>
+  </div>
+  	<%});%>
+  
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="CreateModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+    	<form action="marketplace/create/0" method="post" enctype="multipart/form-data">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<label>
+      	<img src="/static/banner.png" style="width:100%;" id="loadFileImage">
+      	<input type="file" id="filedata" name="files" accept="image/*" style="width:1px; opacity: 0;" onchange="loadFile(event)">
+      	</label>
+        <div class="mb-3">
+		  <label class="form-label">Name</label>
+		  <input type="text" name="name" class="form-control">
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<div class="mb-3">
+				  <label class="form-label">Cap do</label>
+				  <input type="text" name="capdo" class="form-control">
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="mb-3">
+				  <label class="form-label">Tieu chuan</label>
+				  <input type="text" name="tieuchuan" class="form-control">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-6">
+				<div class="mb-3">
+				  <label class="form-label">So dem</label>
+				  <input type="text" name="sodem" class="form-control">
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="mb-3">
+				  <label class="form-label">Loai Phong</label>
+				  <input type="text" name="loaiphong" class="form-control">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-6">
+				<div class="mb-3">
+				  <label class="form-label">So Nam</label>
+				  <input type="text" name="sonam" class="form-control">
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="mb-3">
+				  <label class="form-label">Tru moi nam</label>
+				  <input type="text" name="trumoinam" class="form-control">
+				</div>
+			</div>
+		</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+          var output = document.getElementById('loadFileImage');
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    var exampleModal = document.getElementById('CreateModel')
+	exampleModal.addEventListener('show.bs.modal', function (event) {
+	  // Button that triggered the modal
+	 
+	  // Extract info from data-bs-* attributes
+	  const recipient = JSON.parse(event.relatedTarget.getAttribute('data-content'));
+	  // If necessary, you could initiate an AJAX request here
+	  // and then do the updating in a callback.
+	  //
+	  // Update the modal's content.
+	  console.log(recipient);
+	  var modalTitle = exampleModal.querySelector('.modal-title')
+	  $("#loadFileImage").src = recipient.banner;
+	  modalTitle.textContent = 'Edit' + recipient.name
+	  $("form").attr("action","marketplace/create/"+recipient.id);
+
+	  exampleModal.querySelector('.modal-body input[name=name]').value = recipient.name;
+	  exampleModal.querySelector('.modal-body input[name=capdo]').value = recipient.capdo;
+	  exampleModal.querySelector('.modal-body input[name=tieuchuan]').value = recipient.tieuchuan;
+	  exampleModal.querySelector('.modal-body input[name=sodem]').value = recipient.sodem;
+	  exampleModal.querySelector('.modal-body input[name=loaiphong]').value = recipient.loaiphong;
+	  exampleModal.querySelector('.modal-body input[name=sonam]').value = recipient.sonam;
+	  exampleModal.querySelector('.modal-body input[name=trumoinam]').value = recipient.trumoinam;
+	  
+	  
+	})
+
+    
+</script>

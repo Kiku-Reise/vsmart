@@ -179,7 +179,7 @@ SmartApps = (function (SmartApps, $, window) {
 				loginWallet = web3os.utils.toChecksumAddress(accounts[0]);
 
 				isConnect = true;
-				$("#btn-connect").parent().html('<a class="btn btn-md btn-round btn-outline btn-auto btn-primary btn-with-icon walletLimit" id="btn-disconnect"><span id="walletAddress">'+loginWallet+'</span> <em class="icon  ti ti-lock" style="font-size:18px;"></em></a>');
+				$("#btn-connect").parent().html('<a class="btn btn-md btn-round btn-outline btn-auto btn-primary btn-with-icon walletLimit" id="btn-disconnect"><span id="walletAddress">'+loginWallet+'</span> <em class="icon  ti ti-lock"></em></a>');
 				document.querySelector("#btn-disconnect").addEventListener("click", async function(){
 					await SmartApps.Blockchain.disconnect();
 
@@ -206,7 +206,7 @@ SmartApps = (function (SmartApps, $, window) {
 			    // and does not allow to re-scan the QR code with a new wallet.
 			    // Depending on your use case you may want or want not his behavir.
 			    await web3Modal.clearCachedProvider();
-			    $("#btn-disconnect").parent().html('<a class="btn btn-md btn-round btn-outline btn-auto btn-primary btn-with-icon walletLimit" id="btn-connect"><span id="walletAddress">Connect</span> <em class="icon  ti ti-lock" style="font-size:18px;"></em></a>');
+			    $("#btn-disconnect").parent().html('<a class="btn btn-md btn-round btn-outline btn-auto btn-primary btn-with-icon walletLimit" id="btn-connect"><span id="walletAddress">Connect</span> <em class="icon  ti ti-lock"></em></a>');
 			    provider = null;
 			    window.location.reload();
 			  //}
@@ -215,6 +215,7 @@ SmartApps = (function (SmartApps, $, window) {
 			return isConnect;
 		};
 	SmartApps.Blockchain.connect = async () => {
+			//if(await SmartApps.Blockchain.isStatus() == true) return;
 			var reload = false;
 			if(!web3Modal.cachedProvider){
 			    reload = true;

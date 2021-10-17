@@ -30,6 +30,11 @@ border-top-left-radius: 20px;
 border-top-right-radius: 20px;
 }
 
+.btn-with-icon.btn-md .icon {
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
+}
 
 .header-logo{
 	margin: 0px !important;

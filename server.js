@@ -58,7 +58,8 @@ app.get("/", (req, res) => {
   
  app.set('layout', homeLayout())
  const dataMain = fsFile.readJSONFile('main.json');
- 
+ dataMain.index = fsFile.index();
+ console.log("Log Index",dataMain.index);
   dataMain.loadJS = [];
   res.render("index",dataMain);
 });

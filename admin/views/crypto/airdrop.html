@@ -1,0 +1,101 @@
+<div>
+	<h4>Contract</h4>
+	Airdrop Sender : <br>
+	Token : 
+</div>
+<h4 class="d-flex justify-content-between">Airdrop Wallet Sendder<div><button class="btn btn-primary btnSender">Send</button> <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-light">Import</button></div></h4>
+<table class="table">
+	<thead>
+		<th>ID</th>
+		<th>Wallet</th>
+		<th>Sender</th>
+		<th>Join</th>
+		<th></th>
+	</thead>
+	<tbody>
+		<% items.forEach(function(data, index){ %>
+		<tr>
+			<td><%=data.id%></td>
+			<td><%=data.wallet%></td>
+			<td><%=data.value%></td>
+			<td><%=data.status%></td>
+			
+			<td class="text-end">
+				
+				<a href="/crypto/airdrop/delete/<%=data.id%>" class="btn btn-sm btn-danger">Delete</a>
+			</td>
+		</tr>
+		<% }); %>
+	</tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  	<li class="page-item"><a class="page-link" href="/crypto/airdrop?page=1"><<</a></li>
+    <li class="page-item"><a class="page-link" href="/crypto/airdrop?page=<%- (pagesActive - 1)%>">Previous</a></li>
+   
+    <% for(let i = 0; i < pages; i++){ %>
+    <% if(i < 5){%>
+    	<li class="page-item"><a class="page-link" href="/crypto/airdrop?page=<%=(i+Number(pagesActive))%>"><%=(i+Number(pagesActive))%></a></li>
+    <% }%>
+    <% } %>
+    
+    <li class="page-item"><a class="page-link" href="/crypto/airdrop?page=<%- (Number(pagesActive) + 1)%>">Next</a></li>
+    <li class="page-item"><a class="page-link" href="/crypto/airdrop?page=<%- pages%>">>></a></li>
+  </ul>
+</nav>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    <form method="post" action="/crypto/airdrop/import">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Import Wallet Sender</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+		  <label for="exampleFormControlTextarea1" class="form-label">Import Data</label>
+		  <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Start Import</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$(".btnSender").on("click", async function(){
+		var arv = [];
+	    await $.ajax({
+	      type: "GET",
+	      url: "/crypto/airdrop/sender",
+	      dataType: "json",
+	      success: async function(data) {
+	      	for (var i = 0; i < data.length; i++) {
+	      		arv.push(data[i].wallet);
+	      	}
+	      	
+	      	
+	      }
+	   	});
+	   	let sender = await SmartApps.airdrop.sender(arv);
+	   	if(sender == 'ok'){
+	   		await $.ajax({
+	   			type : "POST",
+	   			url : "/crypto/airdrop/sender",
+	   			dataType : "json"
+	   		});
+	   	}
+
+	});
+</script>

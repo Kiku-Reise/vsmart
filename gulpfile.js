@@ -65,7 +65,7 @@ gulp.task('bootstrap', function() {
         .pipe(browserSync.stream());
     return gulp.src(["dev/bootstrap.scss","dev/admin.scss"])
         .pipe(sass())
-        .pipe(gulp.dest("server/public/dist"))
+        .pipe(gulp.dest("admin/public/dist"))
         .pipe(browserSync.stream());
 });
 
@@ -208,14 +208,17 @@ gulp.task('web3admin', function() {
         ])
         .pipe(concat('jquery.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest("server/public/dist"))
+        .pipe(gulp.dest("admin/public/dist"))
         .pipe(browserSync.stream());
 
-    
+   
     
     return gulp.src([
             'node_modules/web3/dist/web3.min.js',
             'node_modules/web3modal/dist/index.js',
+            'node_modules/evm-chains/dist/umd/index.min.js',
+            'node_modules/@walletconnect/web3-provider/dist/umd/index.min.js',
+            'node_modules/fortmatic/dist/fortmatic.js',
             'dev/blockchain_dev.js',
             'dev/token.js',
             //'dev/airdrop.js',
@@ -227,7 +230,7 @@ gulp.task('web3admin', function() {
         ])
         .pipe(concat('web3admin.js'))
         //.pipe(uglify())
-        .pipe(gulp.dest("server/public/dist"))
+        .pipe(gulp.dest("admin/public/dist"))
         .pipe(browserSync.stream());
     
 });

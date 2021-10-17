@@ -1,0 +1,23 @@
+<form action="/block/sync" method="post">
+<h4 class="d-flex justify-content-between">Settings Blocks<div><button type="submit" class="btn btn-light">Make Sync</button> <a href="/block/create" class="btn btn-primary">Create</a></div></h4>
+</form>
+<table class="table">
+	<thead>
+		<th>ID</th>
+		<th>Sort</th>
+		<th>Name</th>
+		<th>Display</th>
+		<th></th>
+	</thead>
+	<tbody>
+		<% items.forEach(function(data, index){ %>
+		<tr>
+			<td>#<%=data.block_id%></td>
+			<td><%=data.sort%></td>
+			<td><%=data.title%></td>
+			<td><%=data.keyword%></td>
+			<td class="text-end"><a class="btn btn-sm btn-primary" href="/block/<%=data.id%>">Edit</a> <a href="/block/delete/<%=data.id%>" class="btn btn-sm btn-danger">Delete</a></td>
+		</tr>
+		<% }); %>
+	</tbody>
+</table>

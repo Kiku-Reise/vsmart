@@ -1,0 +1,204 @@
+<h4 class="d-flex justify-content-between">Trader Table<div><a href="/trader/create" class="btn btn-light">Create</a></div></h4>
+<table class="table">
+	<thead>
+		<th style="width:100px;">ID</th>
+		<th>Paid</th>
+		<th>Signal</th>
+		<th>Update</th>
+		<th>Win/Loss</th>
+		<th></th>
+	</thead>
+	<tbody>
+		<% items.forEach(function(data, index){ %>
+		<tr>
+			<td><%=data.id%></td>
+			<td><a href="/trader/signal/<%=data.id%>"><%=data.paid%></a></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td class="text-end">
+				<button data-bs-toggle="modal" data-bs-target="#SignalModal" data-content='{"name" : "<%=data.paid%>", "id" : "<%=data.id%>"}' class="btn btn-primary btn-sm">Signal</button>
+				<button data-bs-toggle="modal" data-bs-target="#SignalChannel" data-content='{"name" : "<%=data.paid%>","id" : "<%=data.id%>"}' class="btn btn-primary btn-sm">Channel</button>
+				<button data-bs-toggle="modal" data-bs-target="#SignalGroups" data-content='{"name" : "<%=data.paid%>","id" : "<%=data.id%>"}' class="btn btn-primary btn-sm">Groups</button>
+				
+				<a href="" class="btn btn-primary btn-sm">Edit</a>
+				<a href="" class="btn btn-primary btn-sm">Delete</a>
+			</td>
+		</tr>
+		<% }); %>
+	</tbody>
+</table>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="SignalModal" tabindex="-1" aria-labelledby="SignalModalLabel" aria-hidden="true">
+	
+  <div class="modal-dialog modal-dialog-centered">
+  	
+    <div class="modal-content">
+    	<form id="CreateSignal" method="post" action="">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Signal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+		  <label for="exampleFormControlInput1" class="form-label">Type</label>
+		  <select name="type" class="form-select">
+		  	<option value="1">Long</option>
+		  	<option value="2">Short</option>
+		  </select>
+		</div>
+		<div class="mb-3">
+		  <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
+		  <textarea class="form-control" name="content" rows="5" placeholder="OPEN:xxx
+SL:xxx
+TP:xxx"></textarea>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      </form>
+    </div>
+    
+  </div>
+  
+</div>
+
+
+<script type="text/javascript">
+   
+
+    var SignalModal = document.getElementById('SignalModal')
+		SignalModal.addEventListener('show.bs.modal', function (event) {
+	  // Button that triggered the modal
+	 
+	  // Extract info from data-bs-* attributes
+	  const recipient = JSON.parse(event.relatedTarget.getAttribute('data-content'));
+	  
+	  var modalTitle = SignalModal.querySelector('.modal-title')
+	 
+	  modalTitle.textContent = 'Singal ' + recipient.name
+	  $("form#CreateSignal").attr("action","trader/signal/"+recipient.id);
+	})
+
+    
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="SignalChannel" tabindex="-1" aria-labelledby="SignalModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    	<form id="SendTelegramChannel" method="post" action="">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<img src="">
+      	<input type="text" name="banner">
+        <div class="mb-3">
+				  <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
+				  <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="8"></textarea>
+				</div>
+				<input type="number" name="sid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Send Channel</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="SignalGroups" tabindex="-1" aria-labelledby="SignalModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    	<form id="SendTelegramGroup" method="post" action="">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<img src="">
+      	<input type="text" name="banner">
+        <div class="mb-3">
+				  <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
+				  <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="8"></textarea>
+				</div>
+				<input type="number" name="sid">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Send Group</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+   
+
+    var SignalChannel = document.getElementById('SignalChannel')
+		SignalChannel.addEventListener('show.bs.modal', function (event) {
+	  // Button that triggered the modal
+	 
+	  // Extract info from data-bs-* attributes
+	  const recipient = JSON.parse(event.relatedTarget.getAttribute('data-content'));
+	  
+	  var modalTitle = SignalChannel.querySelector('.modal-title')
+	  var modalContent = SignalChannel.querySelector('.modal-body textarea')
+	  var modalInput = SignalChannel.querySelector('.modal-body input[name="banner"]')
+	  var modalInputSid = SignalChannel.querySelector('.modal-body input[name="sid"]')
+	 	$.ajax({
+	 		type : "GET",
+	 		url : "/trader/signalx/"+recipient.id,
+	 		dataType : "json",
+	 		success : function(data){
+	 			
+	 			modalTitle.textContent = 'Send Telegram Channel ' + recipient.name
+	 			modalContent.value = data.data;
+	 			modalInput.value = data.banner;
+	 			modalInputSid.value = data.sid;
+	  		$("form#SendTelegramChannel").attr("action","trader/telegram/"+recipient.id+"/channel");
+	 		}
+	 	});
+	  
+	});
+
+    
+
+    var SignalGroups = document.getElementById('SignalGroups')
+		SignalGroups.addEventListener('show.bs.modal', function (event) {
+	  // Button that triggered the modal
+	 
+	  // Extract info from data-bs-* attributes
+	  const recipient = JSON.parse(event.relatedTarget.getAttribute('data-content'));
+	  
+	  var modalTitle = SignalGroups.querySelector('.modal-title')
+	  var modalContent = SignalGroups.querySelector('.modal-body textarea')
+	  var modalInput = SignalGroups.querySelector('.modal-body input[name="banner"]')
+	  var modalInputSid = SignalGroups.querySelector('.modal-body input[name="sid"]')
+	 	$.ajax({
+	 		type : "GET",
+	 		url : "/trader/signalx/"+recipient.id,
+	 		dataType : "json",
+	 		success : function(data){
+	 			
+	 			modalTitle.textContent = 'Send Telegram Groups ' + recipient.name
+	 			modalContent.value = data.data;
+	 			modalInput.value = data.banner;
+	 			modalInputSid.value = data.sid;
+	  		$("form#SendTelegramGroup").attr("action","trader/telegram/"+recipient.id+"/group");
+	 		}
+	 	});
+	  
+	});
+
+</script>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<title>Smart Token</title>
+<link rel="stylesheet" href="/static/dist/bootstrap.css">
+<link rel="stylesheet" href="/static/dist/admin.css">
+
+<script type="text/javascript" src="/static/dist/jquery.js"></script>
+
+</head>
+<body>
+
+	<header class="navbar navbar-expand-md navbar-dark bd-navbar" style="z-index:1021;">
+	<nav class="container-xxl flex-wrap flex-md-nowrap">
+	  
+	    <a class="navbar-brand" href="#">A-D</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	        <li class="nav-item">
+	          <a class="nav-link active" aria-current="page" href="/">Home</a>
+	        </li>
+
+	        <li class="nav-item">
+	          <a class="nav-link" href="/block">Block Design</a>
+	        </li>
+
+	        <li class="nav-item">
+	          <a class="nav-link" href="/settings">Settings</a>
+	        </li>
+
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            Apps Service
+	          </a>
+	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+	            
+	            <li><a class="dropdown-item" href="/airdrop">Airdrop Service</a></li>
+	            <li><a class="dropdown-item" href="/trader">Smart Signal</a></li>
+	            <li><a class="dropdown-item" href="/smartbot">Smart Bot</a></li>
+	            
+	          </ul>
+	        </li>
+
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            Crypto Token
+	          </a>
+	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+	            <li><a class="dropdown-item" href="/crypto/token">Smart Token</a></li>
+	            <li><a class="dropdown-item" href="/crypto/airdrop">Airdrop</a></li>
+	            <li><a class="dropdown-item" href="/crypto/presell">Presell</a></li>
+	            <li><a class="dropdown-item" href="/crypto/ido">IDO Solution</a></li>
+	            <li><a class="dropdown-item" href="/crypto/farm">FARM</a></li>
+	            <li><a class="dropdown-item" href="/crypto/staking">STAKING</a></li>
+	            <li><hr class="dropdown-divider"></li>
+	            
+	          </ul>
+	        </li>
+
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            Apps
+	          </a>
+	          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          	
+	            <li><a class="dropdown-item" href="/apps/hotelbooking/booking">Booking</a></li>
+	            <li><a class="dropdown-item" href="/apps/hotelbooking/marketplace">Market Plance</a></li>
+	            
+	          </ul>
+	        </li>
+
+	      </ul>
+	      <ul class="d-flex">
+	        <li><a class="btn btn-md btn-round btn-outline btn-auto btn-primary btn-with-icon walletLimit" id="btn-connect"><span id="walletAddress">Connect</span> <em class="icon ti ti-wallet"></em></a></li>
+	      </ul>
+	    </div>
+	 
+	</nav>
+
+</header>
+
+<nav class="bd-subnavbar py-2" aria-label="Secondary navigation">
+  <div class="container-xxl d-flex align-items-md-center">
+    <div class="bd-search position-relative me-auto">Login : <span class="walletaddress">0x</span></div>
+    
+    <div class="dropdown ms-3">
+      <strong class="balance"></strong> <%= token.name%>
+	  
+  
+	</div>
+
+
+    <button class="btn bd-sidebar-toggle d-md-none py-0 px-1 ms-3 order-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bd-docs-nav" aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi bi-expand" fill="currentColor" viewBox="0 0 16 16">
+  <title>Expand</title>
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10z"></path>
+</svg>
+
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi bi-collapse" fill="currentColor" viewBox="0 0 16 16">
+  <title>Collapse</title>
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707l-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"></path>
+</svg>
+
+    </button>
+  </div>
+</nav>
+
+	<br>
+<div class="container-xxl my-md-4 bd-layout">
+    <aside class="bd-sidebar">
+    </aside>
+    <main class="bd-main order-1">
+    	<%- body %>
+    </main>
+</div>
+	<div class="container-fluid">
+		
+		
+		<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		  <div id="toast-container" class="toast toast-error toast-bottom-right hide toastr-bottom-right" role="alert"  data-autohide="true" data-delay="5000">
+		    
+		    <div class="toast-body toast-body toast-message">
+		      Hello, world! This is a toast message.
+		    </div>
+		  </div>
+		</div>
+
+
+	</div>
+	<script type="text/javascript" src="/static/dist/scripts.js?ver=123"></script>
+	<script type="text/javascript" src="/static/dist/web3admin.js?version=123"></script>
+	
+	
+</body>
+</html>

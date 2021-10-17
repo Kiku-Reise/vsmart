@@ -10,10 +10,10 @@
             <div class="row">
             <% items.forEach(function(data, index){ %>
                 <div class="col-12 col-md-4 mb-3">
-                    <a href="/airdrop/<%=data.id%>">
+                    <a href="/airdrop/<%=data.name%>-<%=data.id%>.html">
                     <div class="card">
                         
-                        <img src="/upload/banner.png" align="right" class="card-img-top">
+                        <img src="/upload/airdrop/<%=data.banner%>" align="right" class="card-img-top">
                         <div class="card-body">
 
                             <h4><%=data.name%></h4>

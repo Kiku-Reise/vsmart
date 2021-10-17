@@ -8,6 +8,7 @@ module.exports = {
       let jsonData = require(path.resolve(__dirname, "json/"+filename));
       let jsonToken = require(path.resolve(__dirname, "json/main.json"));
       let jsonAddress = require(path.resolve(__dirname, "apps/abi/address.json"));
+      
       jsonToken.contractAddress = jsonAddress;
       jsonToken.version = Math.random();
       let jsonMage = Object.assign({}, jsonToken, jsonData);
@@ -23,5 +24,10 @@ module.exports = {
         var files = path.resolve(__dirname, "public/"+file);
         console.log(files);
         return files;
+    },
+    index : () =>{
+        let jsonIndex = require(path.resolve(__dirname, "apps/test/make.json"));
+        
+        return jsonIndex;
     }
 }

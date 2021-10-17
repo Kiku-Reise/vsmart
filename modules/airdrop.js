@@ -30,7 +30,7 @@ router.get(prefix, async (req, res) => {
 	 res.render("airdrop",dataMain);
 });
 
-router.get(prefix + "/:id", async (req, res) => {
+router.get(prefix + "/:text-:id.html", async (req, res) => {
 	 const id = req.params.id;
 
 	 const dataMain = fsFile.readJSONFile('main.json');

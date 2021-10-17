@@ -1,0 +1,123 @@
+<form method="post" action="/airdrop/create/<%=items.id%>" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-12 col-md-8 mb-3">
+        <div class="card">
+            <label>
+            <input type="hidden" value="<%=items.banner%>" name="old_image">
+            <img src="/static/airdrop/<%=items.banner%>" class="card-img-top" alt="..." id="loadFileImage">
+            <input type="file" id="filedata" name="files" accept="image/*" style="width:1px; opacity: 0;" onchange="loadFile(event)">
+            </label>
+            <div class="card-body">
+                Contract
+                <div class="input-group mb-3">
+                  <input type="text" name="contract" class="form-control">
+                  <select class="form-select" name="network" style="max-width:120px;">
+                      <option selected value="0">Network</option>
+                      <option value="1">BSC</option>
+                      <option value="2">ETH</option>
+                      
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Value
+                        <input type="text" value="<%=items.reward%>" name="value" class="form-control">
+                    </div>
+                    <div class="col-4">
+                        Referral
+                        <input type="text" value="<%=items.referral%>" name="referral" class="form-control">
+                    </div>
+                    <div class="col-4">
+                        Partnership
+                        <input type="text" value="<%=items.partnership%>" name="partnership" class="form-control">
+                    </div>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                  <textarea class="form-control" name="contents" rows="8"><%=items.contents%></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4 mb-3">
+        <div class="card mb-4">
+            <button class="btn btn-primary btn-block btn-lg">Submit</button>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                Type
+                <select type="number" name="type" class="form-select">
+                    <option value="payment">Payment</option>
+                    <option value="vote">Vote</option>
+                </select>
+                <br>
+                <b>Contract Airdop</b>
+                <div class="row">
+                    
+                    <div class="col-6">
+                        <label class="form-check-label"><input type="checkbox" name="createcontract" class="form-check-input"> Create Contract</label>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-check-label"><input type="checkbox" name="createbot" class="form-check-input"> Create Bot</label>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                Date Start
+                <div class="row">
+                    <div class="col-4">
+                        <input type="number" name="dstart[d]" class="form-control">
+                    </div>
+                    <div class="col-4">
+                        <input type="number" name="dstart[m]" class="form-control">
+                    </div>
+                    <div class="col-4">
+                        <input type="number" name="dstart[y]" class="form-control">
+                    </div>
+                </div>
+
+                Date End
+                <div class="row">
+                    <div class="col-4">
+                        <input type="number" name="dend[d]" class="form-control">
+                    </div>
+                    <div class="col-4">
+                        <input type="number" name="dend[m]" class="form-control">
+                    </div>
+                    <div class="col-4">
+                        <input type="number" name="dend[y]" class="form-control">
+                    </div>
+                </div>
+                
+                
+                
+
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                Exchange Name
+                <input type="text" name="" class="form-control">
+                Exchange Link
+                <input type="text" name="" class="form-control">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</form>
+<script type="text/javascript">
+    var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+          var output = document.getElementById('loadFileImage');
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    
+</script>
