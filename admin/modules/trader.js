@@ -52,8 +52,9 @@ router.get(prefix + "/signalx/:paid", async (req, res) => {
           msg += 'Entry : '+data.open+"\n";
           msg += 'SL    : '+data.sl+"\n";
           for (var i = 0; i < data.tp.length; i++) {
-               
+               if(data.tp[i] != ""){
                msg += 'TP '+(i+1)+'   : '+data.tp[i]+"\n";
+               }
           }
           
           msg += 'Note  : Move SL entry when '+data.slentry+" pip profit";
