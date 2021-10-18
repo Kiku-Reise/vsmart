@@ -103,12 +103,12 @@ router.post(prefix + "/telegram/:id/:type", async (req, res) => {
      const type = req.params.type;
      const id = req.params.id;
      const {banner,content, sid} = req.body;
-     
+     content += "\nGroup @smartgoldlive | Channel @vsmartfx"
      var getRoomID;
      if(type == "group"){
           getRoomID = "@smartgoldlive";
      }else if(type == "channel"){
-          getRoomID = "";
+          getRoomID = "@vsmartfx";
      }
      if(getRoomID != ""){
           if(banner != ""){
