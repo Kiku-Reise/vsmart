@@ -89,6 +89,7 @@ router.post(prefix + "/signal/:id", async (req, res) => {
      
      var sql = "INSERT INTO trader_signal (paid_id, type, data) VALUES ('"+paid_id+"', '"+type+"', '"+JSON.stringify(data)+"')";
      await db.dbQuery(sql);
+     res.redirect(prefix);
 
 
 });
@@ -127,7 +128,7 @@ router.post(prefix + "/telegram/:id/:type", async (req, res) => {
           }
           
      }
-     res.send("ok");
+     res.redirect(prefix);
 });
 app.use(router);
 module.exports.app = app;
