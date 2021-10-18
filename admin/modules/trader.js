@@ -57,7 +57,8 @@ router.get(prefix + "/signalx/:paid", async (req, res) => {
                }
           }
           
-          msg += 'Note  : Move SL entry when '+data.slentry+" pip profit";
+          msg += 'Note  : Move SL entry when '+data.slentry+" pip profit\n\n";
+          msg += "Group @smartgoldlive | Channel @vsmartfx";
      }else{
           items = {
                banner : "",
@@ -103,7 +104,7 @@ router.post(prefix + "/telegram/:id/:type", async (req, res) => {
      const type = req.params.type;
      const id = req.params.id;
      const {banner,content, sid} = req.body;
-     content += "\nGroup @smartgoldlive | Channel @vsmartfx";
+     
      var getRoomID;
      if(type == "group"){
           getRoomID = "@smartgoldlive";
