@@ -168,7 +168,7 @@ TP:xxx"></textarea>
 	 			modalInput.value = data.banner;
 	 			modalInputSid.value = data.sid;
 	 			modalImg.src = '/static/trader/'+data.banner;
-	  		$("form#SendTelegramChannel").attr("action","trader/telegram/"+recipient.id+"/channel");
+	  		$("form#SendTelegramChannel").attr("action","/trader/telegram/"+recipient.id+"/channel");
 	 		}
 	 	});
 	  
@@ -199,7 +199,7 @@ TP:xxx"></textarea>
 	 			modalInput.value = data.banner;
 	 			modalInputSid.value = data.sid;
 	 			modalImg.src = '/static/trader/'+data.banner;
-	  		$("form#SendTelegramGroup").attr("action","trader/telegram/"+recipient.id+"/group");
+	  		$("form#SendTelegramGroup").attr("action","/trader/telegram/"+recipient.id+"/group");
 	 		}
 	 	});
 	  
