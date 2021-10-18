@@ -6,16 +6,16 @@
         <div class="nk-block nk-block-token">
             <div class="row">
             <% items.forEach(function(data, index){ %>
-                <div class="col-12 col-md-4 mb-3">
+                <div class="col-12 col-md-3 mb-3">
                     <div class="card">
-                        <img src="/upload/trader/gbpusd.png" class="card-img-top">
+                        <img src="/upload/trader/<%=data.banner%>" class="card-img-top">
                         <div class="card-body">
                             
                                 <h4><%=data.name%></h4>
-                                Win : Payment<br>
-                                Loss : <em class="ti ti-starts"></em><br>
-                                Signals : <em class="ti ti-report"></em><br>
-                                Last Active : <em class="ti ti-starts"></em><br>
+                                Win : <%=data.win%><br>
+                                Loss : <em class="ti ti-starts"></em> <%=data.loss%><br>
+                                Signals : <em class="ti ti-report"></em> <%=data.signals%><br>
+                                Last Active : <em class="ti ti-starts"></em> <%=data.updateDate%><br>
                                 <a class="btn btn-primary btn-block" href="/trade/<%=data.id%>">Signals</a>
                             
                         </div>

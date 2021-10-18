@@ -20,7 +20,7 @@ const prefix = "/airdrop";
 router.get(prefix, async (req, res) => {
 	 const dataMain = fsFile.readJSONFile('main.json');
 	 app.set('layout', './layout/pages');
-	 let data = await db.dbQuery("SELECT * FROM airdrop_token ORDER BY id DESC LIMIT 12");
+	 let data = await db.dbQuery("SELECT *,  DATE_FORMAT(start_date,'%D-%m-%Y') as start_date, DATE_FORMAT(end_date,'%D-%m-%Y') as end_date FROM airdrop_token ORDER BY id DESC LIMIT 12");
 	 
 	 dataMain.items = [];
 	 if(data != undefined){
@@ -41,7 +41,7 @@ router.get(prefix + "/:text-:id.html", async (req, res) => {
 	 	return res.render("airdrop-create",dataMain);
 	 }
 
-	 let data = await db.dbQuery("SELECT * FROM airdrop_token WHERE id='"+id+"' ORDER BY id DESC LIMIT 1",true);
+	 let data = await db.dbQuery("SELECT *,  DATE_FORMAT(start_date,'%D-%m-%Y') as start_date, DATE_FORMAT(end_date,'%D-%m-%Y') as end_date FROM airdrop_token WHERE id='"+id+"' ORDER BY id DESC LIMIT 1",true);
 	 
 	 dataMain.items = [];
 	 if(data != undefined){

@@ -20,7 +20,7 @@ const prefix = "/trade";
 router.get(prefix, async (req, res) => {
 	 const dataMain = fsFile.readJSONFile('main.json');
 	 app.set('layout', './layout/pages');
-	 let data = await db.dbQuery("SELECT * FROM airdrop_token ORDER BY id DESC LIMIT 10");
+	 let data = await db.dbQuery("SELECT *, DATE_FORMAT(update_at,'%d-%m-%Y %H:%i') as updateDate FROM trader ORDER BY id DESC LIMIT 40");
 	 
 	 dataMain.items = [];
 	 if(data != undefined){

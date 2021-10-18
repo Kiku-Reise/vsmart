@@ -99,12 +99,12 @@ TP:xxx"></textarea>
       </div>
       <div class="modal-body">
       	<img src="">
-      	<input type="text" name="banner">
+      	<input type="hidden" name="banner">
         <div class="mb-3">
 				  <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
 				  <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="8"></textarea>
 				</div>
-				<input type="number" name="sid">
+				<input type="hidden" name="sid">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -126,12 +126,12 @@ TP:xxx"></textarea>
       </div>
       <div class="modal-body">
       	<img src="">
-      	<input type="text" name="banner">
+      	<input type="hidden" name="banner">
         <div class="mb-3">
 				  <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
 				  <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="8"></textarea>
 				</div>
-				<input type="number" name="sid">
+				<input type="hidden" name="sid">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -156,6 +156,7 @@ TP:xxx"></textarea>
 	  var modalContent = SignalChannel.querySelector('.modal-body textarea')
 	  var modalInput = SignalChannel.querySelector('.modal-body input[name="banner"]')
 	  var modalInputSid = SignalChannel.querySelector('.modal-body input[name="sid"]')
+	  var modalImg = SignalChannel.querySelector('.modal-body img')
 	 	$.ajax({
 	 		type : "GET",
 	 		url : "/trader/signalx/"+recipient.id,
@@ -166,6 +167,7 @@ TP:xxx"></textarea>
 	 			modalContent.value = data.data;
 	 			modalInput.value = data.banner;
 	 			modalInputSid.value = data.sid;
+	 			modalImg.src = '/static/trader/'+data.banner;
 	  		$("form#SendTelegramChannel").attr("action","trader/telegram/"+recipient.id+"/channel");
 	 		}
 	 	});
@@ -185,6 +187,7 @@ TP:xxx"></textarea>
 	  var modalContent = SignalGroups.querySelector('.modal-body textarea')
 	  var modalInput = SignalGroups.querySelector('.modal-body input[name="banner"]')
 	  var modalInputSid = SignalGroups.querySelector('.modal-body input[name="sid"]')
+	  var modalImg = SignalGroups.querySelector('.modal-body img')
 	 	$.ajax({
 	 		type : "GET",
 	 		url : "/trader/signalx/"+recipient.id,
@@ -195,6 +198,7 @@ TP:xxx"></textarea>
 	 			modalContent.value = data.data;
 	 			modalInput.value = data.banner;
 	 			modalInputSid.value = data.sid;
+	 			modalImg.src = '/static/trader/'+data.banner;
 	  		$("form#SendTelegramGroup").attr("action","trader/telegram/"+recipient.id+"/group");
 	 		}
 	 	});
