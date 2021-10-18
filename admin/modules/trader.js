@@ -33,7 +33,7 @@ const prefix = "/trader";
 
 router.get(prefix, async (req, res) => {
      const dataMain = readJSONFile('main.json');
-     dataMain.items = await db.dbQuery("SELECT * FROM trader ORDER BY paid DESC");
+     dataMain.items = await db.dbQuery("SELECT * FROM trader ORDER BY update_at DESC");
 
      if(dataMain.items == undefined) dataMain.items = [];
      res.render("trader",dataMain);
@@ -51,7 +51,11 @@ router.get(prefix + "/signalx/:paid", async (req, res) => {
           msg += (items.type == 1 ? "BUY" : "SELL")+" "+items.paid+"\n";
           msg += 'Entry : '+data.open+"\n";
           msg += 'SL    : '+data.sl+"\n";
-          msg += 'TP    : '+data.tp+"\n";
+          for (var i = 0; i < data.tp.length; i++) {
+               
+               msg += 'TP '+(i+1)+'   : '+data.tp[i]+"\n";
+          }
+          
           msg += 'Note  : Move SL entry when '+data.slentry+" pip profit";
      }else{
           items = {
