@@ -7,10 +7,15 @@
 
             %>
             <div class="col-md-4 col-12 mb-3">
-                <div class="card">
-                    <div class="card-header"><%=data.type == 1 ? "BUY" : "SELL"%> <%=data.paid%></div>
+                <div class="card" style="border-top:5px solid #<%=data.type == 1 ? "20c997" : "dc3545"%>;">
+                    
                     <div class="card-body">
-                       
+                       <div class="d-flex justify-content-between">
+                            <div><b>[<%=data.type == 1 ? "BUY" : "SELL"%>]</b> <%=data.paid%></div>
+                            <div>ID : <%=data.id%></div>
+                                
+                        </div>
+                        <hr>
                        <div class="row">
                             <div class="col-6">Daily Trader</div>
                             <div class="col-6">
@@ -23,7 +28,7 @@
                             
                             <div class="col-6">
                                Pips : <%=data.json.pips%><br>
-                               Price : <%=data.json.open%>
+                               Price : <em class="ti ti-tag"></em> <%=data.json.open%>
                             </div>
                             <div class="col-6">
                                 <button class="btn btn-outline-primary" style="width: 100%">Win</button>
