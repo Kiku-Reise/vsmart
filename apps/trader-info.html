@@ -6,7 +6,7 @@
             <% items.forEach(function(data, index){ 
 
             %>
-            <div class="col-md-4 col-12">
+            <div class="col-md-4 col-12 mb-3">
                 <div class="card">
                     <div class="card-header"><%=data.type == 1 ? "BUY" : "SELL"%> <%=data.paid%></div>
                     <div class="card-body">
@@ -18,7 +18,7 @@
                                Close : <%=data.closeDate%> 
                             </div>
                        </div>
-
+                       <br>
                        <div class="row">
                             
                             <div class="col-6">
@@ -26,7 +26,7 @@
                                Price : <%=data.json.open%>
                             </div>
                             <div class="col-6">
-                                <button class="btn btn-primary btn-block">Win</button>
+                                <button class="btn btn-outline-primary" style="width: 100%">Win</button>
                             </div>
                        </div>
 
