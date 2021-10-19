@@ -30,10 +30,21 @@ router.get(prefix, async (req, res) => {
 	 res.render("trader",dataMain);
 });
 
-router.get(prefix + "/:id", (req, res) => {
+router.get(prefix + "/:id", async (req, res) => {
+	 const id = req.params.id;
 	 const dataMain = fsFile.readJSONFile('main.json');
 	 app.set('layout', './layout/pages');
+	 let data = await db.dbQuery("SELECT *, DATE_FORMAT(create_at,'%d-%m %H:%i') as updateDate, DATE_FORMAT(close_at,'%d-%m %H:%i') as closeDate FROM trader_signal LEFT JOIN trader ON (trader_signal.paid_id=trader.id) WHERE paid_id='"+id+"'  ORDER BY create_at DESC LIMIT 40");
 	 
+	 dataMain.items = [];
+	 if(data != undefined){
+	 	for (var i = 0; i < data.length; i++) {
+	 		var json = JSON.parse(data[i].data);
+	 		data[i].json = json;
+	 		dataMain.items.push(data[i]);
+	 	}
+	 	
+	 }
 	 dataMain.loadJS = [];
 	 res.render("trader-info",dataMain);
 });

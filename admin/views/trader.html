@@ -1,4 +1,4 @@
-<h4 class="d-flex justify-content-between">Trader Table<div><a href="/trader/create" class="btn btn-light">Create</a></div></h4>
+<h4 class="d-flex justify-content-between">Trader Table</h4>
 <table class="table">
 	<thead>
 		<th style="width:100px;">ID</th>
@@ -13,16 +13,16 @@
 		<tr>
 			<td><%=data.id%></td>
 			<td><a href="/trader/signal/<%=data.id%>"><%=data.paid%></a></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td><%=data.signals%></td>
+			<td><%=data.updateDate%></td>
+			<td><%=data.win%> / <%=data.loss%></td>
 			<td class="text-end">
 				<button data-bs-toggle="modal" data-bs-target="#SignalModal" data-content='{"name" : "<%=data.paid%>", "id" : "<%=data.id%>"}' class="btn btn-primary btn-sm">Signal</button>
 				<button data-bs-toggle="modal" data-bs-target="#SignalChannel" data-content='{"name" : "<%=data.paid%>","id" : "<%=data.id%>"}' class="btn btn-primary btn-sm">Channel</button>
 				<button data-bs-toggle="modal" data-bs-target="#SignalGroups" data-content='{"name" : "<%=data.paid%>","id" : "<%=data.id%>"}' class="btn btn-primary btn-sm">Groups</button>
 				
-				<a href="" class="btn btn-primary btn-sm">Edit</a>
-				<a href="" class="btn btn-primary btn-sm">Delete</a>
+				<a data-content="<%=data.telegram_id%>" class="btn btn-primary btn-sm">SLE</a>
+				<a data-content="<%=data.id%>" class="btn btn-primary btn-sm">Close</a>
 			</td>
 		</tr>
 		<% }); %>

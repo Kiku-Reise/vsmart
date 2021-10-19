@@ -33,6 +33,14 @@ const prefix = "/trader";
 
 router.get(prefix, async (req, res) => {
      const dataMain = readJSONFile('main.json');
+     dataMain.items = await db.dbQuery("SELECT trader.*, DATE_FORMAT(trader.update_at,'%d-%m-%Y %H:%i') as updateDate, trader_signal.paid_id, trader_signal.id as signal_id, trader_signal.telegram_id  FROM trader LEFT JOIN trader_signal ON (trader.id=trader_signal.paid_id) ORDER BY trader.update_at,trader_signal.id DESC");
+
+     if(dataMain.items == undefined) dataMain.items = [];
+     res.render("trader",dataMain);
+});
+
+router.get(prefix + "/:id", async (req, res) => {
+     const dataMain = readJSONFile('main.json');
      dataMain.items = await db.dbQuery("SELECT * FROM trader ORDER BY update_at DESC");
 
      if(dataMain.items == undefined) dataMain.items = [];
@@ -52,7 +60,7 @@ router.get(prefix + "/signalx/:paid", async (req, res) => {
           msg += 'Entry : '+data.open+"\n";
           msg += 'SL    : '+data.sl+"\n";
           for (var i = 0; i < data.tp.length; i++) {
-               if(data.tp[i] != ""){
+               if(data.tp[i] != "" && data.tp[i] != null){
                msg += 'TP '+(i+1)+'   : '+data.tp[i]+"\n";
                }
           }
