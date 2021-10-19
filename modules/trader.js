@@ -34,7 +34,7 @@ router.get(prefix + "/:id", async (req, res) => {
 	 const id = req.params.id;
 	 const dataMain = fsFile.readJSONFile('main.json');
 	 app.set('layout', './layout/pages');
-	 let data = await db.dbQuery("SELECT *, DATE_FORMAT(create_at,'%d-%m %H:%i') as updateDate, DATE_FORMAT(close_at,'%d-%m %H:%i') as closeDate FROM trader_signal LEFT JOIN trader ON (trader_signal.paid_id=trader.id) WHERE paid_id='"+id+"'  ORDER BY create_at DESC LIMIT 40");
+	 let data = await db.dbQuery("SELECT *,trader_signal.id as signal_id, DATE_FORMAT(create_at,'%d-%m %H:%i') as updateDate, DATE_FORMAT(close_at,'%d-%m %H:%i') as closeDate FROM trader_signal LEFT JOIN trader ON (trader_signal.paid_id=trader.id) WHERE paid_id='"+id+"'  ORDER BY create_at DESC LIMIT 40");
 	 
 	 dataMain.items = [];
 	 if(data != undefined){
