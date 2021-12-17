@@ -2,13 +2,13 @@ const { Api, TelegramClient, events } = require('telegram')
 const { StringSession, StoreSession } = require('telegram/sessions')
 const db = require('./server/db');
 const input = require("input");
-const phone = "+840903908078";
-const logincode = "FTbp58MfKSE";
-const validateCode = "72748";
+const phone = "";
+const logincode = "";
+const validateCode = "";
 const fs = require('fs');
-const apiId = 2086188
-const apiHash = '37d13b7e1e63bf7f1bd9e605f1ec1e2c'
-const apiLogigString = '1BQANOTEuMTA4LjU2LjEzOQG7bKUhPJ7bRooJE0fypn+OFP1ecG1QnxJPgG1GP+CVBNCQWdvPoBfqTwAexd9GtYsE92c7y/Wo8lZ2UnXv3G+D5VMaf/meNwCQq/WfIZuMZkCIIp/6XpfhoyC6rbxfvf9x1kvr5dtVIMDeomDlgkj23y5FxyaIdv1D+rJghMnkL5Spy8oqc0A9FVfxRmyaH0qMLDLwvUSeaZpr7Xk3Q96jZjMzw2lSiRnC4BJ1fxLZDmCAwSOS5V2gkKxQJq0iIcsQMi4wbHfJapGGfhooyfydY7b7RShwuorv+dl7NUHKOs2ef3CmZwNOHN7SudBbvDSp3+J27V/In2fjtWHOeEKfxQ==';
+const apiId = 
+const apiHash = ''
+const apiLogigString = '';
 const stringSession = new StringSession(apiLogigString); // fill this later with the value from session.save()
 
 async function sleep(millis) {
